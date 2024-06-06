@@ -9,7 +9,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 
 import { useColorScheme } from "@mui/material/styles";
-import ModeProp from "../../types/Mode";
+import ModeProp from "@/types/Mode";
 
 
 function SelectMode() {
