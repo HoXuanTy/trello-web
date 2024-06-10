@@ -29,7 +29,7 @@ function Starred() {
           id="starred-button"
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
-          sx={{ color: "#fff", textTransform: "capitalize", fontSize: "14px" }}
+          sx={{   fontSize: "14px" }}
         >
           Starred
         </Button>

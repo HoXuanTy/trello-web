@@ -49,7 +49,6 @@ function Profile() {
             fontSize: "11px",
             fontWeight: 700,
             margin: "16px 20px 8px",
-            textTransform: "uppercase",
           }}
         >
           Account

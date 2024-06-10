@@ -27,7 +27,6 @@ function AppHeader() {
       px={2}
       sx={{
         height: (theme) => theme.trello.headerHeight,
-        backgroundColor: "primary.dark",
         width: "100%",
         display: "flex",
         alignItems: "center",
@@ -35,16 +34,16 @@ function AppHeader() {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <AppsIcon />
+        <AppsIcon sx={{ color: "primary.main"}}/>
         <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
           <SvgIcon
             component={TrelloIcon}
             inheritViewBox
-            sx={{ fontSize: 20 }}
+            sx={{ fontSize: 20, color:"primary.main" }}
           />
           <Typography
             component="span"
-            sx={{ fontSize: "21px", fontWeight: "bold" }}
+            sx={{ fontSize: "21px", fontWeight: "bold", color:"primary.main" }}
           >
             Trello
           </Typography>
@@ -54,10 +53,7 @@ function AppHeader() {
         <Recent />
         <Starred />
         <Templates />
-        <Button
-          variant="outlined"
-          sx={{ color: "#fff", textTransform: "capitalize", fontSize: "14px" }}
-        >
+        <Button variant="outlined" sx={{ fontSize: "14px" }}>
           Create
         </Button>
       </Box>
@@ -66,46 +62,45 @@ function AppHeader() {
           component="form"
           sx={{
             "& > :not(style)": { m: 1, width: "23ch" },
-            "& .MuiInputBase-input": {
-              py: 0.5,
+            "& .MuiOutlinedInput-input": {
+              py: 0.8,
               px: 1,
-              
             },
             "& .MuiInputAdornment-root": {
-              marginRight: 0
+              marginRight: 0,
             },
             "& .MuiInputBase-root": {
-              paddingLeft: 1
-            }
+              paddingLeft: 1,
+            },
           }}
           noValidate
           autoComplete="on"
         >
           <TextField
             id="input-with-icon-textfield"
-            placeholder="Search"
+            placeholder="Search..."
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{fontSize: '20px'}}/>
+                  <SearchIcon sx={{ fontSize: "20px", color: "primary.main" }} />
                 </InputAdornment>
               ),
             }}
-            sx={{padding:0}}
+            sx={{ padding: 0 }}
             variant="outlined"
           />
         </Box>
         <SelectMode />
         <Tooltip title="Notifications">
-          <Badge color="info" variant="dot" sx={{ cursor: "pointer" }}>
+          <Badge color="secondary" variant="dot" sx={{ cursor: "pointer" }}>
             <IconButton size="small">
-              <NotificationsOutlinedIcon />
+              <NotificationsOutlinedIcon sx={{ color: "primary.main" }} />
             </IconButton>
           </Badge>
         </Tooltip>
         <Tooltip title="Information">
           <IconButton size="small">
-            <HelpOutlineIcon />
+            <HelpOutlineIcon sx={{ color: "primary.main"}} />
           </IconButton>
         </Tooltip>
         <Profile />

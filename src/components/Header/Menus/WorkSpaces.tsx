@@ -30,7 +30,7 @@ function WorkSpaces() {
         id="workspaces-button"
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{ color: "#fff", textTransform: "capitalize", fontSize: "14px" }}
+        sx={{ fontSize: "14px" }}
       >
         Workspaces
       </Button>
@@ -43,7 +43,12 @@ function WorkSpaces() {
           "aria-labelledby": "workspaces-button",
         }}
       >
-        <Typography  variant="h2" sx={{ fontSize: '12px', fontWeight: 600, margin:'16px 20px 8px'}}>Current Workspace</Typography>
+        <Typography
+          variant="h2"
+          sx={{ fontSize: "12px", fontWeight: 600, margin: "16px 20px 8px" }}
+        >
+          Current Workspace
+        </Typography>
         <MenuItem>
           <Stack direction="row" spacing={2} alignItems="center">
             <Avatar sx={{ bgcolor: deepOrange[500] }} variant="rounded">
@@ -53,7 +58,12 @@ function WorkSpaces() {
           </Stack>
         </MenuItem>
         <Divider />
-        <Typography  variant="h2" sx={{ fontSize: '12px', fontWeight: 600, margin:'16px 20px 8px'}}>Your Workspace</Typography>
+        <Typography
+          variant="h2"
+          sx={{ fontSize: "12px", fontWeight: 600, margin: "16px 20px 8px" }}
+        >
+          Your Workspace
+        </Typography>
         <MenuItem>
           <Stack direction="row" spacing={2} alignItems="center">
             <Avatar sx={{ bgcolor: deepOrange[500] }} variant="rounded">
@@ -62,7 +72,12 @@ function WorkSpaces() {
             <ListItemText>Ho Xuan Ty</ListItemText>
           </Stack>
         </MenuItem>
-        <Typography  variant="h2" sx={{ fontSize: '12px', fontWeight: 600, margin:'16px 20px 8px'}}>Guest Workspace</Typography>
+        <Typography
+          variant="h2"
+          sx={{ fontSize: "12px", fontWeight: 600, margin: "16px 20px 8px" }}
+        >
+          Guest Workspace
+        </Typography>
         <MenuItem>
           <Stack direction="row" spacing={2} alignItems="center">
             <Avatar sx={{ bgcolor: blue[800] }} variant="rounded">
@@ -71,7 +86,6 @@ function WorkSpaces() {
             <ListItemText>Thu Huong</ListItemText>
           </Stack>
         </MenuItem>
-
       </Menu>
     </>
   );

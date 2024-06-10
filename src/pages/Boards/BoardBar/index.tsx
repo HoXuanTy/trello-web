@@ -5,7 +5,7 @@ function BoardBar() {
     <Box
     sx={{
       height: (theme) => theme.trello.boardHeight,
-      backgroundColor: "primary.main",
+      backgroundColor: "primary.dark",
     }}
   >
     Board_bar
