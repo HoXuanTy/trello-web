@@ -12,7 +12,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SvgIcon from "@mui/material/SvgIcon";
 import AppsIcon from "@mui/icons-material/Apps";
 import SearchIcon from "@mui/icons-material/Search";
-import TrelloIcon from "@/assets/trello.svg?react";
+import TrelloIcon from "@/assets/icons/trello.svg?react";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 
 import WorkSpaces from "./Menus/WorkSpaces";
