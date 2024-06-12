@@ -22,7 +22,6 @@ import EnterpriseIcon from "@/assets/icons/enterprise.svg?react";
 function ChangeVisibility() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  console.log("an", anchorEl);
 
   const handleChange = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -70,7 +69,7 @@ function ChangeVisibility() {
           alignItems="center"
           px={1}
         >
-          <Typography sx={{ flex: 1, textAlign: "center", fontSize: "14px" }}>
+          <Typography sx={{ flex: 1, textAlign: "center"}}>
             Change Visibility
           </Typography>
           <IconButton
@@ -92,11 +91,6 @@ function ChangeVisibility() {
               <LockOutlinedIcon sx={{ fontSize: "14px", color: orange[900] }} />
               <ListItemText
                 primary="Privite"
-                sx={{
-                  "& .MuiTypography-root": {
-                    fontSize: "14px",
-                  },
-                }}
               />
             </Stack>
             <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>
@@ -111,11 +105,6 @@ function ChangeVisibility() {
               <PeopleAltOutlinedIcon sx={{ fontSize: "16px" }} />
               <ListItemText
                 primary="Workspace"
-                sx={{
-                  "& .MuiTypography-root": {
-                    fontSize: "14px",
-                  },
-                }}
               />
             </Stack>
             <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>
@@ -134,11 +123,6 @@ function ChangeVisibility() {
               />
               <ListItemText
                 primary="Organization"
-                sx={{
-                  "& .MuiTypography-root": {
-                    fontSize: "14px",
-                  },
-                }}
               />
             </Stack>
             <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>
@@ -155,11 +139,7 @@ function ChangeVisibility() {
               />
               <ListItemText
                 primary="Public"
-                sx={{
-                  "& .MuiTypography-root": {
-                    fontSize: "14px",
-                  },
-                }}
+                
               />
             </Stack>
             <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>

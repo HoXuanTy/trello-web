@@ -67,6 +67,43 @@ const theme = extendTheme({
         }),
       },
     },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fontSize: "16px",
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: 0,
+        }
+      }
+    },
+    MuiListItemButton:{
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
+      }
+    },
+    MuiTypography:{
+      styleOverrides: {
+        root: {
+          fontSize: 14
+        }
+      }
+    },
+    MuiAvatar :{
+      styleOverrides: {
+        root: {
+          width: 24,
+          height: 24
+        }
+      }
+    },
+   
   },
 });
 
