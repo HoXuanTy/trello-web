@@ -21,20 +21,6 @@ const theme = extendTheme({
     headerHeight: "48px",
     boardHeight: "56px",
   },
-  colorSchemes: {
-    // light: {
-    //   palette: {
-    //     primary: blue,
-    //     secondary: deepOrange
-    //   },
-    // },
-    // dark: {
-    //   palette: {
-    //     primary: cyan,
-    //     secondary: orange
-    //   },
-    // },
-  },
   components: {
     MuiButton: {
       styleOverrides: {
