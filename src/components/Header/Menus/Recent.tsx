@@ -29,7 +29,7 @@ function Recent() {
         id="recent-button"
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{ fontSize: "14px" }}
+        sx={{ fontSize: "14px", color: "white" }}
       >
         Recent
       </Button>

@@ -30,7 +30,13 @@ function SideBar() {
   };
 
   return (
-    <Box sx={{ bgcolor: theme.palette.primary.main }}>
+    <Box
+      sx={{
+        bgcolor: (theme) =>
+          theme.palette.mode === "dark" ? "#1d2125" : "#0B50AD",
+        borderRight: "1px solid #ffffff29"
+      }}
+    >
       <Button
         sx={{
           minWidth: 0,
@@ -49,7 +55,8 @@ function SideBar() {
             top: 0,
             left: 5,
             border: 1,
-            bgcolor: theme.palette.primary.main,
+            bgcolor: (theme) =>
+              theme.palette.mode === "dark" ? "#1d2125" : "#08479e",
           }}
         >
           <KeyboardArrowRightOutlinedIcon

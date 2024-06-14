@@ -29,8 +29,8 @@ function Starred() {
           id="starred-button"
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
-          sx={{   fontSize: "14px" }}
-        >
+          sx={{ fontSize: "14px", color: "white" }}
+          >
           Starred
         </Button>
         <Menu

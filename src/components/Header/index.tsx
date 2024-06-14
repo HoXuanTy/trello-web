@@ -31,19 +31,22 @@ function AppHeader() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        bgcolor: (theme) =>
+          theme.palette.mode === "dark" ? "#1d2125" : "#08479e",
+        borderBottom: "1px solid #ffffff29"
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <AppsIcon sx={{ color: "primary.main"}}/>
+        <AppsIcon sx={{ color: "white", fontSize: "20px" }} />
         <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
           <SvgIcon
             component={TrelloIcon}
             inheritViewBox
-            sx={{ fontSize: 20, color:"primary.main" }}
+            sx={{ fontSize: 20, color: "white" }}
           />
           <Typography
             component="span"
-            sx={{ fontSize: "21px", fontWeight: "bold", color:"primary.main" }}
+            sx={{ fontSize: "21px", fontWeight: "bold", color: "white" }}
           >
             Trello
           </Typography>
@@ -53,7 +56,16 @@ function AppHeader() {
         <Recent />
         <Starred />
         <Templates />
-        <Button variant="outlined" sx={{ fontSize: "14px" }}>
+        <Button
+          variant="outlined"
+          sx={{
+            fontSize: "14px",
+            color: "white",
+            border: "none",
+            "&:hover": { border: "none" },
+            bgcolor: "#fff3",
+          }}
+        >
           Create
         </Button>
       </Box>
@@ -82,25 +94,41 @@ function AppHeader() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ fontSize: "20px", color: "primary.main" }} />
+                  <SearchIcon sx={{ fontSize: "20px", color: "white" }} />
                 </InputAdornment>
               ),
             }}
-            sx={{ padding: 0 }}
+            sx={{
+              padding: 0,
+              "& input": { color: "white" },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "white",
+                },
+                "&:hover fieldset": {
+                  borderColor: "white",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "white",
+                },
+              },
+            }}
             variant="outlined"
           />
         </Box>
         <SelectMode />
         <Tooltip title="Notifications">
-          <Badge color="secondary" variant="dot" sx={{ cursor: "pointer" }}>
-            <IconButton size="small">
-              <NotificationsOutlinedIcon sx={{ color: "primary.main" }} />
-            </IconButton>
-          </Badge>
+          <IconButton>
+            <Badge color="warning" variant="dot" sx={{ cursor: "pointer" }}>
+              <NotificationsOutlinedIcon
+                sx={{ color: "white", fontSize: "20px" }}
+              />
+            </Badge>
+          </IconButton>
         </Tooltip>
         <Tooltip title="Information">
-          <IconButton size="small">
-            <HelpOutlineIcon sx={{ color: "primary.main"}} />
+          <IconButton>
+            <HelpOutlineIcon sx={{ color: "white", fontSize: "20px" }} />
           </IconButton>
         </Tooltip>
         <Profile />

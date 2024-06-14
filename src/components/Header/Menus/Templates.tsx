@@ -25,7 +25,7 @@ function Templates() {
     <>
       <Button
         onClick={handleClick}
-        sx={{   fontSize: "14px" }}
+        sx={{ fontSize: "14px", color: "white" }}
         endIcon={<KeyboardArrowDownIcon />}
       >
         Templates

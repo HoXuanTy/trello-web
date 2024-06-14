@@ -21,6 +21,7 @@ const theme = extendTheme({
     headerHeight: "48px",
     boardHeight: "56px",
   },
+  colorSchemes: {},
   components: {
     MuiButton: {
       styleOverrides: {
@@ -31,26 +32,12 @@ const theme = extendTheme({
     },
     MuiInputLabel: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.primary.main,
-          fontSize: "0.875rem",
-        }),
+        root: { fontSize: "0.875rem" },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.primary.main,
-          fontSize: "0.875rem",
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "&:hover": {
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.main,
-            },
-          },
-        }),
+        root: { fontSize: "0.875rem" },
       },
     },
     MuiSvgIcon: {
@@ -64,32 +51,31 @@ const theme = extendTheme({
       styleOverrides: {
         root: {
           minWidth: 0,
-        }
-      }
+        },
+      },
     },
-    MuiListItemButton:{
+    MuiListItemButton: {
       styleOverrides: {
         root: {
-          padding: 0
-        }
-      }
+          padding: 0,
+        },
+      },
     },
-    MuiTypography:{
+    MuiTypography: {
       styleOverrides: {
         root: {
-          fontSize: 14
-        }
-      }
+          fontSize: 14,
+        },
+      },
     },
-    MuiAvatar :{
+    MuiAvatar: {
       styleOverrides: {
         root: {
           width: 24,
-          height: 24
-        }
-      }
+          height: 24,
+        },
+      },
     },
-   
   },
 });
 

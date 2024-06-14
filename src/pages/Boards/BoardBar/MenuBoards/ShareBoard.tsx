@@ -22,6 +22,7 @@ function ShareBoard() {
               color: "#333",
             },
             px: "12px",
+            color: "#333"
           }}
         />
       </Tooltip>

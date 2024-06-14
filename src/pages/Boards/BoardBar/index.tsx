@@ -23,7 +23,10 @@ function BoardBar() {
         width: "100%",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        bgcolor: (theme) =>
+          theme.palette.mode === "dark" ? "#0E4473" : "#0B50AD",
+        borderBottom: "1px solid #ffffff29"
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
