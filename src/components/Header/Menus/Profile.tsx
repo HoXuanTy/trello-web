@@ -56,7 +56,7 @@ function Profile() {
         <MenuItem>
           <Stack direction="row" spacing={2} alignItems="center">
             <Avatar
-              sx={{ bgcolor: deepOrange[500] }}
+              sx={{ bgcolor: deepOrange[500], width: "40px", height: "40px" }}
               variant="circular"
               sizes="medium"
             >

@@ -30,7 +30,7 @@ function WorkSpaces() {
         id="workspaces-button"
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{ fontSize: "14px" }}
+        sx={{ fontSize: "14px", color: "white" }}
       >
         Workspaces
       </Button>
