@@ -14,12 +14,13 @@ function Board() {
       maxWidth={false}
       sx={{
         height: "100vh",
+        overflow: "hidden",
       }}
     >
       <AppHeader />
-      <Stack direction="row" position="relative">
+      <Stack direction="row">
         <SideBar />
-        <Box flexGrow={1}>
+        <Box sx={{width:"100%", height: "100%"}}>
           <BoardBar />
           <BoardContent />
         </Box>

@@ -10,6 +10,7 @@ function GroupAvatar() {
           border: "none",
           marginLeft: "-2px",
           fontSize: "14px",
+          cursor: "pointer",
         },
       }}
     >

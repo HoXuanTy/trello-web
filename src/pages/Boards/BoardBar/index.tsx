@@ -6,13 +6,13 @@ import Divider from "@mui/material/Divider";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import BoltIcon from "@mui/icons-material/Bolt";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 
 import FilterCard from "./MenuBoards/FilterCard";
 import CustomizeView from "./MenuBoards/CustomizeView";
 import ChangeVisibility from "./MenuBoards/ChangeVisibility";
 import GroupAvatar from "@/components/GroupAvatars/GroupAvatar";
 import ShareBoard from "./MenuBoards/ShareBoard";
-import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 function BoardBar() {
   return (
     <Box
