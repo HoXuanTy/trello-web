@@ -1,8 +1,8 @@
 import Container from "@mui/material/Container";
 
-import BoardBar from "./BoardBar";
-import AppHeader from "@/components/Header";
-import BoardContent from "./BoardContent";
+import BoardBar from "./BoardBar/BoardBar";
+import AppHeader from "@/components/AppHeader/AppHeader";
+import BoardContent from "./BoardContent/BoardContent";
 import SideBar from "@/components/SideBar/SideBar";
 
 import Stack from "@mui/material/Stack";
