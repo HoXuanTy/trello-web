@@ -57,6 +57,7 @@ function SideBar() {
             border: 1,
             bgcolor: (theme) =>
               theme.palette.mode === "dark" ? "#1d2125" : "#08479e",
+            zIndex:1
           }}
         >
           <KeyboardArrowRightOutlinedIcon
