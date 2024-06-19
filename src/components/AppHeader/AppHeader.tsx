@@ -51,7 +51,6 @@ function AppHeader() {
             Trello
           </Typography>
         </Box>
-
         <WorkSpaces />
         <Recent />
         <Starred />
