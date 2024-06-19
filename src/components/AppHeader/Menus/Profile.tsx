@@ -15,8 +15,8 @@ import Logout from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 
-import { deepOrange } from "@mui/material/colors";
 import Image1 from "@/assets/image/image1.jpg";
+import { deepOrange } from "@mui/material/colors";
 function Profile() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
