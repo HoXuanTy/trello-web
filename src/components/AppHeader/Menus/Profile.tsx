@@ -16,7 +16,7 @@ import Settings from "@mui/icons-material/Settings";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 
 import { deepOrange } from "@mui/material/colors";
-
+import Image1 from "@/assets/image/image1.jpg";
 function Profile() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -31,7 +31,7 @@ function Profile() {
     <>
       <Tooltip title="Account">
         <IconButton onClick={handleClick} size="small">
-          <Avatar sx={{ width: "24px", height: "24px" }} />
+          <Avatar sx={{ width: "24px", height: "24px" }} src={Image1} />
         </IconButton>
       </Tooltip>
       <Menu
@@ -59,9 +59,8 @@ function Profile() {
               sx={{ bgcolor: deepOrange[500], width: "40px", height: "40px" }}
               variant="circular"
               sizes="medium"
-            >
-              K
-            </Avatar>
+              src={Image1}
+            />
             <Box>
               <Typography>Ho Xuan Ty</Typography>
               <Typography sx={{ fontSize: "12px", color: "gray" }}>

@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import SelectMode from "@/components/SelectMode";
+import SelectMode from "@/components/SelectMode/SelectMode";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Badge from "@mui/material/Badge";
