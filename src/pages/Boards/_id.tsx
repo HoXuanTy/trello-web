@@ -1,3 +1,6 @@
+
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 
 import BoardBar from "./BoardBar/BoardBar";
@@ -5,8 +8,8 @@ import AppHeader from "@/components/AppHeader/AppHeader";
 import BoardContent from "./BoardContent/BoardContent";
 import SideBar from "@/components/SideBar/SideBar";
 
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
+import { mockData } from "@/apis/mock-data";
+
 function Board() {
   return (
     <Container
@@ -21,8 +24,8 @@ function Board() {
       <Stack direction="row">
         <SideBar />
         <Box sx={{width:"100%", height: "100%"}}>
-          <BoardBar />
-          <BoardContent />
+          <BoardBar board={mockData.board}/>
+          <BoardContent board={mockData.board} />
         </Box>
       </Stack>
     </Container>

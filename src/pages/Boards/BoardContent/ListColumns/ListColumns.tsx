@@ -3,7 +3,9 @@ import Column from "./Column/Column";
 import Button from "@mui/material/Button";
 
 import AddIcon from "@mui/icons-material/Add";
-function ListColumns() {
+
+import { Board } from "@/types/BoardProp";
+function ListColumns({ columns }: Pick<Board, "columns">) {
   return (
     <Box
       sx={{
@@ -17,8 +19,9 @@ function ListColumns() {
         scrollbarWidth: "auto",
       }}
     >
-      <Column />
-      <Column />
+      {columns.map((column) => (
+        <Column key={column._id} column={column}/>
+      ))}
       <Box
         sx={{
           minWidth: "272px",

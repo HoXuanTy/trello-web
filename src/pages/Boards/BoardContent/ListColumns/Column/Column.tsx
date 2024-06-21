@@ -19,7 +19,12 @@ import AddIcon from "@mui/icons-material/Add";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ListCards from "./ListCards/ListCards";
 
-function Column() {
+import { ColumnProp } from "@/types/ColumnProp";
+import mapOrder from "@/utils/sorts";
+
+function Column({ column }: ColumnProp) {
+  const orderedCard = mapOrder(column.cards, column.cardOrderIds, "_id");
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,7 +33,6 @@ function Column() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <Box
       sx={{
@@ -52,7 +56,7 @@ function Column() {
           p: 2,
         }}
       >
-        <Typography sx={{ fontWeight: "bold" }}>Column title</Typography>
+        <Typography sx={{ fontWeight: "bold" }}>{column.title}</Typography>
         <Box>
           <IconButton onClick={handleClick} sx={{ borderRadius: "8px" }}>
             <MoreHorizOutlinedIcon sx={{ fontSize: "20px" }} />
@@ -100,7 +104,7 @@ function Column() {
           </Menu>
         </Box>
       </Box>
-      <ListCards />
+      <ListCards cards={orderedCard} />
       <Box
         sx={{
           height: (theme) => theme.trello.columnFooterHeight,
