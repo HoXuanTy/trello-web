@@ -1,7 +1,8 @@
 import Box from "@mui/material/Box";
 import Card from "./Card/Card";
+import { Column } from "@/types/BoardProp";
 
-function ListCards() {
+function ListCards({ cards }: Pick<Column, "cards">) {
   return (
     <Box
       sx={{
@@ -21,7 +22,9 @@ function ListCards() {
         m: "0 4px",
       }}
     >
-      <Card />
+      {cards.map((card) => (
+        <Card key={card._id} card={card}/>
+      ))}
     </Box>
   );
 }

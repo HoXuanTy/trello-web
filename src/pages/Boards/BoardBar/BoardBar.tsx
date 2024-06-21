@@ -13,7 +13,8 @@ import CustomizeView from "./MenuBoards/CustomizeView";
 import ChangeVisibility from "./MenuBoards/ChangeVisibility";
 import GroupAvatar from "@/components/GroupAvatars/GroupAvatar";
 import ShareBoard from "./MenuBoards/ShareBoard";
-function BoardBar() {
+import BoardProp from "@/types/BoardProp";
+function BoardBar({board}: BoardProp) {
   return (
     <Box
       px={2}
@@ -31,7 +32,7 @@ function BoardBar() {
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
         <Chip
-          label="Project management"
+          label={board.title}
           sx={{
             fontSize: "18px",
             color: "#fff",
@@ -65,7 +66,7 @@ function BoardBar() {
             }}
           />
         </IconButton>
-        <ChangeVisibility />
+        <ChangeVisibility types={board.types}/>
         <CustomizeView />
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>

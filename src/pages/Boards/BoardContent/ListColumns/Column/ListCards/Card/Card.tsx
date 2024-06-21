@@ -8,9 +8,16 @@ import GroupIcon from "@mui/icons-material/Group";
 import CommentIcon from "@mui/icons-material/Comment";
 import AttachmentIcon from "@mui/icons-material/Attachment";
 
-import Image1 from "@/assets/image/image1.jpg";
+import { CardProp } from "@/types/CardProp";
 
-function Card() {
+function Card({ card }: CardProp) {
+  const shouldShowCardActions = () => {
+    return (
+      !!card.memberIds.length ||
+      !!card.comments.length ||
+      !!card.attachments.length
+    );
+  };
   return (
     <MuiCard
       sx={{
@@ -19,30 +26,34 @@ function Card() {
         overflow: "unset",
       }}
     >
-      <CardMedia
-        component="img"
-        height="140"
-        image={Image1}
-        alt="green iguana"
-      />
+      {card.cover && (
+        <CardMedia component="img" height="140" image={card.cover} />
+      )}
       <CardContent sx={{ p: 1.5, "&:last-child": { p: 1.5 } }}>
-        <Typography>Lizard</Typography>
+        <Typography>{card.title}</Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {card.description}
         </Typography>
       </CardContent>
-      <CardActions sx={{ p: "0 4px 8px 4px" }}>
-        <Button size="small" startIcon={<GroupIcon />}>
-          20
-        </Button>
-        <Button size="small" startIcon={<CommentIcon />}>
-          10
-        </Button>
-        <Button size="small" startIcon={<AttachmentIcon />}>
-          5
-        </Button>
-      </CardActions>
+      {shouldShowCardActions() && (
+        <CardActions sx={{ p: "0 4px 8px 4px" }}>
+          {!!card.memberIds.length && (
+            <Button size="small" startIcon={<GroupIcon />}>
+              {card.memberIds.length}
+            </Button>
+          )}
+          {!!card.comments.length && (
+            <Button size="small" startIcon={<CommentIcon />}>
+              {card.comments.length}
+            </Button>
+          )}
+          {!!card.attachments.length && (
+            <Button size="small" startIcon={<AttachmentIcon />}>
+              {card.comments.length}
+            </Button>
+          )}
+        </CardActions>
+      )}
     </MuiCard>
   );
 }

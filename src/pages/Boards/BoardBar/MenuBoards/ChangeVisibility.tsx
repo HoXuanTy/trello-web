@@ -11,15 +11,12 @@ import ListItemText from "@mui/material/ListItemText";
 
 import CloseIcon from "@mui/icons-material/Close";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
-
-import { orange, green } from "@mui/material/colors";
 
 import SvgIcon from "@mui/material/SvgIcon";
-import EnterpriseIcon from "@/assets/icons/enterprise.svg?react";
 
-function ChangeVisibility() {
+import { Board } from "@/types/BoardProp";
+
+function ChangeVisibility({ types }: Pick<Board, "types">) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -69,7 +66,7 @@ function ChangeVisibility() {
           alignItems="center"
           px={1}
         >
-          <Typography sx={{ flex: 1, textAlign: "center"}}>
+          <Typography sx={{ flex: 1, textAlign: "center" }}>
             Change Visibility
           </Typography>
           <IconButton
@@ -85,69 +82,34 @@ function ChangeVisibility() {
             <CloseIcon sx={{ fontSize: "16px" }} />
           </IconButton>
         </Stack>
-        <MenuItem sx={{ whiteSpace: "normal" }}>
-          <Box>
-            <Stack direction="row" alignItems="center" gap={0.5}>
-              <LockOutlinedIcon sx={{ fontSize: "14px", color: orange[900] }} />
-              <ListItemText
-                primary="Privite"
-              />
-            </Stack>
-            <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>
-              Board members and không gian làm việc của Tý Hồ xuân Workspace
-              admins can see and edit this board.
-            </Typography>
-          </Box>
-        </MenuItem>
-        <MenuItem sx={{ whiteSpace: "normal" }}>
-          <Box>
-            <Stack direction="row" alignItems="center" gap={0.5}>
-              <PeopleAltOutlinedIcon sx={{ fontSize: "16px" }} />
-              <ListItemText
-                primary="Workspace"
-              />
-            </Stack>
-            <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>
-              All members of the không gian làm việc của Tý Hồ xuân Workspace
-              can see and edit this board.
-            </Typography>
-          </Box>
-        </MenuItem>
-        <MenuItem sx={{ whiteSpace: "normal" }} disabled>
-          <Box>
-            <Stack direction="row" alignItems="center" gap={0.5}>
-              <SvgIcon
-                component={EnterpriseIcon}
-                inheritViewBox
-                sx={{ fontSize: "16px" }}
-              />
-              <ListItemText
-                primary="Organization"
-              />
-            </Stack>
-            <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>
-              All members of the organization can see this board. The board must
-              be added to an enterprise Workspace to enable this.
-            </Typography>
-          </Box>
-        </MenuItem>
-        <MenuItem sx={{ whiteSpace: "normal" }}>
-          <Box>
-            <Stack direction="row" alignItems="center" gap={0.5}>
-              <PublicOutlinedIcon
-                sx={{ fontSize: "14px", color: green[700] }}
-              />
-              <ListItemText
-                primary="Public"
-                
-              />
-            </Stack>
-            <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>
-              Anyone on the internet can see this board. Only board members can
-              edit.
-            </Typography>
-          </Box>
-        </MenuItem>
+        {types.map((item) => (
+          <MenuItem key={item._id} sx={{ whiteSpace: "normal" }} disabled={item.disabled}>
+            <Box>
+              <Stack direction="row" alignItems="center" gap={0.5}>
+                <SvgIcon
+                  component={item.icon}
+                  inheritViewBox
+                  sx={{
+                    fontSize: "16px",
+                    color:
+                      item.title === "private"
+                        ? "red"
+                        : item.title === "public"
+                        ? "green"
+                        : "inherit",
+                  }}
+                />
+                <ListItemText
+                  sx={{ textTransform: "capitalize" }}
+                  primary={item.title}
+                />
+              </Stack>
+              <Typography variant="body2" sx={{ fontSize: "12px", mt: 0.5 }}>
+                {item.description}
+              </Typography>
+            </Box>
+          </MenuItem>
+        ))}
       </Menu>
     </>
   );
