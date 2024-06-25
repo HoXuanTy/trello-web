@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box"; // error if import before container ?
 
 import BoardBar from "./BoardBar/BoardBar";
 import AppHeader from "@/components/AppHeader/AppHeader";
