@@ -28,7 +28,7 @@ export type Column = {
     boardId: string,
     title: string,
     cardOrderIds: string[],
-    cards: Card[]
+    cards: Card[] 
 }
 
 export type Card = {

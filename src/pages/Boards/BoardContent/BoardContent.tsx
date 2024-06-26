@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-
 import {
   DndContext,
+  DragOverlay,
   DragEndEvent,
+  DragStartEvent,
   MouseSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-
 import Box from "@mui/material/Box";
 import ListColumns from "./ListColumns/ListColumns";
-import BoardProp, { Column } from "@/types/BoardProp";
+import BoardProp, { Column as ColumnType } from "@/types/BoardProp";
 import mapOrder from "@/utils/sorts";
+import Column from "./ListColumns/Column/Column";
 
+const ACTIVE_DRAG_TYPE = {
+  COLUMN: "ACTIVE_DRAG_COLUMN_TYPE",
+  CARD: "ACTIVE_DRAG_CARD_TYPE",
+};
 function BoardContent({ board }: BoardProp) {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -22,16 +27,28 @@ function BoardContent({ board }: BoardProp) {
   });
   const sensors = useSensors(mouseSensor);
 
-  const [orderedColumns, setOrderedColums] = useState<Column[]>([]);
+  const [orderedColumns, setOrderedColums] = useState<ColumnType[]>([]);
+
+  const [activeDragType, setActiveDragType] = useState<string | null>(null);
+  const [activeDragData, setActiveDragData] = useState<ColumnType | null>(null);
 
   useEffect(() => {
     setOrderedColums(mapOrder(board.columns, board.columnOrderIds, "_id"));
   }, [board]);
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    console.log("handleDragEnd", event);
-    const { active, over } = event;
+  const handleDragStart = (event: DragStartEvent) => {
+    console.log("handleDragStart", event);
+    const { active } = event;
+    setActiveDragType(
+      active.data.current?.columnId
+        ? ACTIVE_DRAG_TYPE.CARD
+        : ACTIVE_DRAG_TYPE.COLUMN
+    );
+    setActiveDragData(active.data.current); //
+  };
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
     if (active.id !== over?.id) {
       setOrderedColums((column) => {
         const oldIndex = column.findIndex((column) => column._id === active.id);
@@ -39,10 +56,16 @@ function BoardContent({ board }: BoardProp) {
         return arrayMove(column, oldIndex, newIndex);
       });
     }
+    setActiveDragType(null);
+    setActiveDragData(null);
   };
 
   return (
-    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+    <DndContext
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      sensors={sensors}
+    >
       <Box
         sx={{
           bgcolor: (theme) =>
@@ -53,6 +76,11 @@ function BoardContent({ board }: BoardProp) {
       >
         <ListColumns columns={orderedColumns} />
       </Box>
+      <DragOverlay style={{
+        opacity: 0.4,
+      }}>
+        {activeDragType ? <Column column={activeDragData} /> : null}
+      </DragOverlay>
     </DndContext>
   );
 }
