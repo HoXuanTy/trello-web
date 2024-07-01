@@ -11,9 +11,13 @@ import {
 import { arrayMove } from "@dnd-kit/sortable";
 import Box from "@mui/material/Box";
 import ListColumns from "./ListColumns/ListColumns";
-import BoardProp, { Column as ColumnType } from "@/types/BoardProp";
+import BoardProp, {
+  Card as CardType,
+  Column as ColumnType,
+} from "@/types/BoardProp";
 import mapOrder from "@/utils/sorts";
 import Column from "./ListColumns/Column/Column";
+import Card from "./ListColumns/Column/ListCards/Card/Card";
 
 const ACTIVE_DRAG_TYPE = {
   COLUMN: "ACTIVE_DRAG_COLUMN_TYPE",
@@ -30,14 +34,13 @@ function BoardContent({ board }: BoardProp) {
   const [orderedColumns, setOrderedColums] = useState<ColumnType[]>([]);
 
   const [activeDragType, setActiveDragType] = useState<string | null>(null);
-  const [activeDragData, setActiveDragData] = useState<ColumnType | null>(null);
+  const [activeDragData, setActiveDragData] = useState<any>(null); // ?????????
 
   useEffect(() => {
     setOrderedColums(mapOrder(board.columns, board.columnOrderIds, "_id"));
   }, [board]);
 
   const handleDragStart = (event: DragStartEvent) => {
-    console.log("handleDragStart", event);
     const { active } = event;
     setActiveDragType(
       active.data.current?.columnId
@@ -76,10 +79,17 @@ function BoardContent({ board }: BoardProp) {
       >
         <ListColumns columns={orderedColumns} />
       </Box>
-      <DragOverlay style={{
-        opacity: 0.4,
-      }}>
-        {activeDragType ? <Column column={activeDragData} /> : null}
+      <DragOverlay
+        style={{
+          opacity: 0.8,
+        }}
+      >
+        {activeDragType === ACTIVE_DRAG_TYPE.COLUMN ? (
+          <Column column={activeDragData} />
+        ) : null}
+        {activeDragType === ACTIVE_DRAG_TYPE.CARD ? (
+          <Card card={activeDragData} />
+        ) : null}
       </DragOverlay>
     </DndContext>
   );

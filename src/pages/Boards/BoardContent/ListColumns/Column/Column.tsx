@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Box from "@mui/material/Box";
@@ -30,18 +30,25 @@ function Column({ column }: ColumnProp) {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: column._id, data: { ...column } });
+  } = useSortable({
+    id: column._id,
+    data: {
+      ...column,
+    },
+  });
 
-  // const customTransform = {
-  //   ...transform,
-  //   rotate: 5,
-  // };
+  const columnRef = useRef<HTMLElement>(null);
+  const [heightRef, setHeightRef] = useState(0);
+
+  useLayoutEffect(() => {
+    columnRef.current && setHeightRef(columnRef.current.offsetHeight);
+  }, []);
 
   const dndKitColumnStyles = {
     transform: CSS.Translate.toString(transform),
     transition,
     opacity: isDragging ? 0.5 : undefined,
-    height: "100%"
+    height: "100%",
   };
 
   const orderedCard = mapOrder(column.cards, column.cardOrderIds, "_id");
@@ -60,6 +67,7 @@ function Column({ column }: ColumnProp) {
       {!isDragging ? (
         <Box
           {...listeners}
+          ref={columnRef}
           sx={{
             minWidth: "272px",
             maxWidth: "272px",
@@ -72,7 +80,7 @@ function Column({ column }: ColumnProp) {
               `calc(${theme.trello.boardContentHeight} - ${theme.spacing(
                 5.5
               )})`,
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           <Box
@@ -84,7 +92,7 @@ function Column({ column }: ColumnProp) {
               p: 2,
             }}
           >
-            <Typography sx={{ fontWeight: "bold" }}>{isDragging?null:column.title}</Typography>
+            <Typography sx={{ fontWeight: "bold" }}>{column.title}</Typography>
             <Box>
               <IconButton onClick={handleClick} sx={{ borderRadius: "8px" }}>
                 <MoreHorizOutlinedIcon sx={{ fontSize: "20px" }} />
@@ -167,7 +175,7 @@ function Column({ column }: ColumnProp) {
             ml: 2,
             borderRadius: 3,
             bgcolor: "#333",
-            height: "100%"
+            height: heightRef,
           }}
         ></Box>
       )}
