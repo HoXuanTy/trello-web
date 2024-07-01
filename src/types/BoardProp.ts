@@ -1,3 +1,4 @@
+import { UniqueIdentifier } from "@dnd-kit/core";
 import { SvgIconProps } from "@mui/material";
 
 type BoardProp = {
@@ -5,7 +6,7 @@ type BoardProp = {
 };
 
 export type Board = {
-    _id: string,
+    _id: UniqueIdentifier,
     title: string,
     description: string,
     types: TypeProp[],
@@ -16,7 +17,7 @@ export type Board = {
 }
 
 type TypeProp = {
-    _id: string,
+    _id: UniqueIdentifier,
     title: string,
     icon: React.ComponentType<SvgIconProps> | React.FunctionComponent<React.SVGAttributes<SVGElement>>, //??
     description: string,
@@ -24,7 +25,7 @@ type TypeProp = {
 }
 
 export type Column = {
-    _id: string,
+    _id: UniqueIdentifier,
     boardId: string,
     title: string,
     cardOrderIds: string[],
@@ -32,7 +33,7 @@ export type Column = {
 }
 
 export type Card = {
-    _id: string,
+    _id: UniqueIdentifier,
     boardId: string,
     columnId: string,
     title: string,

@@ -7,6 +7,10 @@ import {
   MouseSensor,
   useSensor,
   useSensors,
+  DropAnimation,
+  defaultDropAnimationSideEffects,
+  DragOverEvent,
+  UniqueIdentifier,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import Box from "@mui/material/Box";
@@ -40,6 +44,12 @@ function BoardContent({ board }: BoardProp) {
     setOrderedColums(mapOrder(board.columns, board.columnOrderIds, "_id"));
   }, [board]);
 
+  const findColumnByCardId = (cardId: UniqueIdentifier) => {
+    return orderedColumns.find((column) =>
+      column.cards.map((card) => card._id).includes(cardId)
+    );
+  };
+
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
     setActiveDragType(
@@ -48,6 +58,23 @@ function BoardContent({ board }: BoardProp) {
         : ACTIVE_DRAG_TYPE.COLUMN
     );
     setActiveDragData(active.data.current); //
+  };
+
+  const hanldeDragOver = (event: DragOverEvent) => {
+    console.log("handleDragOver", event);
+    if (activeDragType === ACTIVE_DRAG_TYPE.COLUMN) return;
+
+    const { active, over } = event;
+
+    const {
+      id: activeDraggingCardId,
+      data: { current: activeDraggingCardData },
+    } = active;
+    const { id: overCardId } = over;
+
+    //find two columns by CardId
+    const activeColumn = findColumnByCardId(activeDraggingCardId);
+    const overColum = findColumnByCardId(overCardId);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -66,6 +93,7 @@ function BoardContent({ board }: BoardProp) {
   return (
     <DndContext
       onDragStart={handleDragStart}
+      onDragOver={hanldeDragOver}
       onDragEnd={handleDragEnd}
       sensors={sensors}
     >
