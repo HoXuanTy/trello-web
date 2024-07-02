@@ -12,14 +12,10 @@ import AttachmentIcon from "@mui/icons-material/Attachment";
 import { CardProp } from "@/types/CardProp";
 
 function Card({ card }: CardProp) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: card._id, data: { ...card } });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: card._id,
+    data: { ...card },
+  });
 
   const dndKitCardStyles = {
     transform: CSS.Translate.toString(transform),
@@ -28,9 +24,7 @@ function Card({ card }: CardProp) {
   };
 
   const shouldShowCardActions =
-    card.memberIds.length ||
-    !!card.comments.length ||
-    !!card.attachments.length;
+    card.memberIds.length || !!card.comments.length || !!card.attachments.length;
   return (
     <MuiCard
       ref={setNodeRef}
@@ -41,10 +35,16 @@ function Card({ card }: CardProp) {
         cursor: "pointer",
         boxShadow: "0 1px 1px rgba(0, 0, 0, 0.2)",
         overflow: "unset",
+        borderRadius: 2,
       }}
     >
       {card.cover && (
-        <CardMedia component="img" height="140" image={card.cover} />
+        <CardMedia
+          component="img"
+          height="140"
+          sx={{ borderRadius: "8px 8px 0 0" }}
+          image={card.cover}
+        />
       )}
       <CardContent sx={{ p: 1.5, "&:last-child": { p: 1.5 } }}>
         <Typography>{card.title}</Typography>

@@ -28,7 +28,7 @@ export type Column = {
     _id: UniqueIdentifier,
     boardId: string,
     title: string,
-    cardOrderIds: string[],
+    cardOrderIds: UniqueIdentifier[],
     cards: Card[] 
 }
 
