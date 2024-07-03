@@ -42,7 +42,7 @@ function Column({ column }: ColumnProp) {
 
   useLayoutEffect(() => {
     columnRef.current && setHeightRef(columnRef.current.offsetHeight);
-  }, []);
+  }, [columnRef.current?.offsetHeight]);
 
   const dndKitColumnStyles = {
     transform: CSS.Translate.toString(transform),
