@@ -35,7 +35,7 @@ export type Column = {
 export type Card = {
     _id: UniqueIdentifier,
     boardId: string,
-    columnId: string,
+    columnId: UniqueIdentifier,
     title: string,
     description: string,
     cover: string,
