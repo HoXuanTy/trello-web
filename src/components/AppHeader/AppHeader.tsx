@@ -8,13 +8,11 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-
 import SvgIcon from "@mui/material/SvgIcon";
 import AppsIcon from "@mui/icons-material/Apps";
 import SearchIcon from "@mui/icons-material/Search";
 import TrelloIcon from "@/assets/icons/trello.svg?react";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-
 import WorkSpaces from "./Menus/WorkSpaces";
 import Recent from "./Menus/Recent";
 import Starred from "./Menus/Starred";
