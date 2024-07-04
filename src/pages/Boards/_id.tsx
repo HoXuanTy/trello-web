@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import BoardBar from "./BoardBar/BoardBar";
 import AppHeader from "@/components/AppHeader/AppHeader";
 import BoardContent from "./BoardContent/BoardContent";
-import SideBar from "@/components/SideBar/SideBar";
 
 import { mockData } from "@/apis/mock-data";
 
@@ -20,13 +19,8 @@ function Board() {
       }}
     >
       <AppHeader />
-      <Stack direction="row">
-        <SideBar />
-        <Box sx={{ width: "100%", height: "100%" }}>
-          <BoardBar board={mockData.board} />
-          <BoardContent board={mockData.board} />
-        </Box>
-      </Stack>
+      <BoardBar board={mockData.board} />
+      <BoardContent board={mockData.board} />
     </Container>
   );
 }
