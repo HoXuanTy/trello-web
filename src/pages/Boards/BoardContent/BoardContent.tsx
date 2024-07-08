@@ -23,7 +23,8 @@ import ListColumns from "./ListColumns/ListColumns";
 import mapOrder from "@/utils/sorts";
 import Column from "./ListColumns/Column/Column";
 import Card from "./ListColumns/Column/ListCards/Card/Card";
-import { cloneDeep } from "lodash";
+import { cloneDeep, isEmpty } from "lodash";
+import { generatePlaceholderCard } from "@/utils/placeholderCard";
 
 const ACTIVE_DRAG_TYPE = {
   COLUMN: "ACTIVE_DRAG_COLUMN_TYPE",
@@ -41,7 +42,7 @@ function BoardContent({ board }: BoardProp) {
 
   const [activeDraggingColumnData, setactiveDraggingColumnData] = useState<ColumnType | null>(null);
   const [activeDragType, setActiveDragType] = useState<string | null>(null);
-  const [overleyDragData, setOverleyDragData] = useState<any>(null); // ?????????
+  const [overleyDragData, setOverleyDragData] = useState<any>(null); // need mentor support
 
   const lastOverId = useRef<UniqueIdentifier | null>(null);
 
@@ -77,7 +78,7 @@ function BoardContent({ board }: BoardProp) {
       const overCardIndex = overColumn.cards.findIndex((card) => card._id === overCardId);
 
       let newCardIndex: number;
-
+      //
       const isBelowOverItem =
         active.rect.current.translated &&
         active.rect.current.translated.top > over.rect.top + over.rect.height;
@@ -93,6 +94,12 @@ function BoardContent({ board }: BoardProp) {
         nextActiveColumn.cards = nextActiveColumn.cards.filter(
           (card) => card._id !== activeDraggingCardId
         );
+
+        //add placeholder card if column is empty
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn)]; // need mentor support
+        }
+
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map((card) => card._id);
       }
 
@@ -105,6 +112,10 @@ function BoardContent({ board }: BoardProp) {
           ...activeDraggingCardData,
           columnId: overColumn._id,
         });
+
+        // removed placeholder card if have card
+        nextOverColumn.cards = nextOverColumn.cards.filter((card) => !card.FE_PlaceholderCard);
+
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map((card) => card._id);
       }
       return nextColumns;
@@ -229,7 +240,7 @@ function BoardContent({ board }: BoardProp) {
       }
 
       const poiterIntersections = pointerWithin(args);
-      
+
       if (!poiterIntersections.length) return [];
 
       let overId = getFirstCollision(poiterIntersections, "id");

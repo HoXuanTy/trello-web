@@ -19,29 +19,30 @@ export type Board = {
 type TypeProp = {
     _id: UniqueIdentifier,
     title: string,
-    icon: React.ComponentType<SvgIconProps> | React.FunctionComponent<React.SVGAttributes<SVGElement>>, //??
+    icon: React.ComponentType<SvgIconProps> | React.FunctionComponent<React.SVGAttributes<SVGElement>>,
     description: string,
     disabled?: boolean
 }
 
 export type Column = {
     _id: UniqueIdentifier,
-    boardId: string,
+    boardId: UniqueIdentifier,
     title: string,
     cardOrderIds: UniqueIdentifier[],
-    cards: Card[] 
+    cards: Card[]
 }
 
 export type Card = {
     _id: UniqueIdentifier,
-    boardId: string,
+    boardId: UniqueIdentifier,
     columnId: UniqueIdentifier,
     title: string,
     description: string,
     cover: string,
     memberIds: string[],
     comments: string[],
-    attachments: string[]
+    attachments: string[],
+    FE_PlaceholderCard?: boolean
 }
 
 export default BoardProp

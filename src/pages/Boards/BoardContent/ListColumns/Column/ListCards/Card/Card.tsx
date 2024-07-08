@@ -22,9 +22,10 @@ function Card({ card }: CardProp) {
     transition,
     opacity: isDragging ? 0.5 : undefined,
   };
-
+  
   const shouldShowCardActions =
-    card.memberIds.length || !!card.comments.length || !!card.attachments.length;
+    !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length;
+
   return (
     <MuiCard
       ref={setNodeRef}
@@ -36,6 +37,7 @@ function Card({ card }: CardProp) {
         boxShadow: "0 1px 1px rgba(0, 0, 0, 0.2)",
         overflow: "unset",
         borderRadius: 2,
+        display: card?.FE_PlaceholderCard ? "none" : "block",
       }}
     >
       {card.cover && (

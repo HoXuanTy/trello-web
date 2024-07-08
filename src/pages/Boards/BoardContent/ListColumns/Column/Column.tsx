@@ -23,14 +23,7 @@ import { ColumnProp } from "@/types/ColumnProp";
 import mapOrder from "@/utils/sorts";
 
 function Column({ column }: ColumnProp) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: column._id,
     data: {
       ...column,
@@ -73,13 +66,10 @@ function Column({ column }: ColumnProp) {
             maxWidth: "272px",
             ml: 2,
             borderRadius: 3,
-            bgcolor: (theme) =>
-              theme.palette.mode === "dark" ? "#1d2125" : "#f1f2f4",
+            bgcolor: (theme) => (theme.palette.mode === "dark" ? "#1d2125" : "#f1f2f4"),
             height: "fit-content",
             maxHeight: (theme) =>
-              `calc(${theme.trello.boardContentHeight} - ${theme.spacing(
-                5.5
-              )})`,
+              `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5.5)})`,
             cursor: "pointer",
           }}
         >
