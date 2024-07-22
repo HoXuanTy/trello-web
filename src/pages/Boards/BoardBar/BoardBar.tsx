@@ -10,7 +10,7 @@ import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 
 import FilterCard from "./MenuBoards/FilterCard";
 import CustomizeView from "./MenuBoards/CustomizeView";
-import ChangeVisibility from "./MenuBoards/ChangeVisibility";
+// import ChangeVisibility from "./MenuBoards/ChangeVisibility";
 import GroupAvatar from "@/components/GroupAvatars/GroupAvatar";
 import ShareBoard from "./MenuBoards/ShareBoard";
 import BoardProp from "@/types/BoardProp";
@@ -66,7 +66,7 @@ function BoardBar({board}: BoardProp) {
             }}
           />
         </IconButton>
-        <ChangeVisibility types={board.types}/>
+        {/* <ChangeVisibility types={board.types}/> */}
         <CustomizeView />
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
