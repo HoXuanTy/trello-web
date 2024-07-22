@@ -16,7 +16,9 @@ function Board() {
     const boardId = "6695f954a1146cab78aec0e4";
     fetchBoardDetailsAPI(boardId).then((board: BoardType) => setBoard(board));
   }, []);
-
+  
+  console.log('board', board);
+  
   if (!board) {
     return (
       <Box
