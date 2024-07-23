@@ -38,6 +38,13 @@ const theme = extendTheme({
   },
 
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          color: "#172b4d",
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -53,6 +60,9 @@ const theme = extendTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: { fontSize: "0.875rem" },
+        input: {
+          "&::placeholder": { color: "#172b4d", fontWeight: "600" },
+        },
       },
     },
     MuiSvgIcon: {

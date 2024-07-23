@@ -10,24 +10,22 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 function Board() {
-  const [board, setBoard] = useState<BoardType | null>(null);
+  // const [board, setBoard] = useState<BoardType | null>(null);
 
-  useEffect(() => {
-    const boardId = "6695f954a1146cab78aec0e4";
-    fetchBoardDetailsAPI(boardId).then((board: BoardType) => setBoard(board));
-  }, []);
+  // useEffect(() => {
+  //   const boardId = "6695f954a1146cab78aec0e4";
+  //   fetchBoardDetailsAPI(boardId).then((board: BoardType) => setBoard(board));
+  // }, []);
   
-  console.log('board', board);
-  
-  if (!board) {
-    return (
-      <Box
-        sx={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        <CircularProgress size={30} />
-      </Box>
-    );
-  }
+  // if (!board) {
+  //   return (
+  //     <Box
+  //       sx={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
+  //     >
+  //       <CircularProgress size={30} />
+  //     </Box>
+  //   );
+  // }
 
   return (
     <Container
@@ -39,8 +37,8 @@ function Board() {
       }}
     >
       <AppHeader />
-      <BoardBar board={board} />
-      <BoardContent board={board} />
+      <BoardBar board={mockData.board} />
+      <BoardContent board={mockData.board} />
     </Container>
   );
 }
