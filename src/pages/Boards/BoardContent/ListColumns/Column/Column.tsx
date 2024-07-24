@@ -70,6 +70,7 @@ function Column({ column }: ColumnProp) {
             ml: 2,
             borderRadius: 3,
             bgcolor: (theme) => (theme.palette.mode === "dark" ? "#1d2125" : "#f1f2f4"),
+            color: (theme) => (theme.palette.mode === "dark" ? "#ffffff" : "#172b4d"),
             height: "fit-content",
             maxHeight: (theme) =>
               `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5.5)})`,
