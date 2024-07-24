@@ -87,7 +87,7 @@ function AppHeader() {
         >
           <TextField
             id="input-with-icon-textfield"
-            placeholder="Search..."
+            placeholder="Search"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -97,7 +97,7 @@ function AppHeader() {
             }}
             sx={{
               padding: 0,
-              "& input": { color: "white" },
+              "& input": { color: "white", "&::placeholder":{color: "white", opacity:1, fontWeight: "400"} },
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: "white",
