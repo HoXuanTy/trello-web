@@ -33,6 +33,9 @@ function Column({ column }: ColumnProp) {
   const columnRef = useRef<HTMLElement>(null);
   const [heightRef, setHeightRef] = useState(0);
 
+  const [openNewCardForm, setOpenNewCardForm] = useState(false);
+  const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm);
+
   useLayoutEffect(() => {
     columnRef.current && setHeightRef(columnRef.current.offsetHeight);
   }, [columnRef.current?.offsetHeight]);
@@ -71,6 +74,7 @@ function Column({ column }: ColumnProp) {
             maxHeight: (theme) =>
               `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5.5)})`,
             cursor: "pointer",
+            pb:0.5
           }}
         >
           <Box
@@ -130,32 +134,46 @@ function Column({ column }: ColumnProp) {
               </Menu>
             </Box>
           </Box>
-          <ListCards cards={orderedCard} />
-          <Box
-            sx={{
-              height: (theme) => theme.trello.columnFooterHeight,
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              p: 2,
-              gap: 2,
-            }}
-          >
-            <Button
-              startIcon={<AddIcon />}
+          <ListCards
+            cards={orderedCard}
+            isOpenAddNewCard={openNewCardForm}
+            toggleOpenNewCardForm={toggleOpenNewCardForm}
+          />
+          {!openNewCardForm && (
+            <Box
               sx={{
-                flex: 1,
-                justifyContent: "flex-start",
-                alignItems: "center",
-                borderRadius: 2,
+                height: (theme) => theme.trello.columnFooterHeight,
+                p: "4px 4px 0px 4px",
+                m: "0 4px",
               }}
             >
-              Add a card
-            </Button>
-            <Tooltip title="Drag to move">
-              <DragHandleIcon sx={{ fontSize: "20px", cursor: "pointer" }} />
-            </Tooltip>
-          </Box>
+              <Box
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: 2,
+                }}
+              >
+                <Button
+                  onClick={toggleOpenNewCardForm}
+                  startIcon={<AddIcon />}
+                  sx={{
+                    flex: 1,
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    borderRadius: 2,
+                  }}
+                >
+                  Add a card
+                </Button>
+                <Tooltip title="Drag to move">
+                  <DragHandleIcon sx={{ fontSize: "20px", cursor: "pointer" }} />
+                </Tooltip>
+              </Box>
+            </Box>
+          )}
         </Box>
       ) : (
         <Box
