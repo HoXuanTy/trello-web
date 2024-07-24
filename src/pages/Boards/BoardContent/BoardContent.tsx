@@ -4,7 +4,6 @@ import {
   DragOverlay,
   DragEndEvent,
   DragStartEvent,
-  MouseSensor,
   useSensor,
   useSensors,
   DragOverEvent,
@@ -16,6 +15,7 @@ import {
   pointerWithin,
   getFirstCollision,
 } from "@dnd-kit/core";
+import { MouseSensor } from "@/customLibraries/DndKitSensors";
 import BoardProp, { Card as CardType, Column as ColumnType } from "@/types/BoardProp";
 import { arrayMove } from "@dnd-kit/sortable";
 import Box from "@mui/material/Box";
@@ -97,7 +97,7 @@ function BoardContent({ board }: BoardProp) {
 
         //add placeholder card if column is empty
         if (isEmpty(nextActiveColumn.cards)) {
-          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn)]; // need mentor support
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn) as any]; // need mentor support
         }
 
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map((card) => card._id);

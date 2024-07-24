@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import Box from "@mui/material/Box";
 import Card from "./Card/Card";
@@ -16,6 +17,15 @@ interface ListCardsProp {
 }
 
 function ListCards({ cards, isOpenAddNewCard, toggleOpenNewCardForm }: ListCardsProp) {
+  const [newCardTitle, setNewCardTitle] = useState("");
+
+  const handleAddNewCard = () => {
+    console.log("new Card", newCardTitle);
+    //goi APIs ...
+
+    setNewCardTitle("");
+  };
+
   const maxHeightListCard = !isOpenAddNewCard
     ? `calc(${theme.trello.boardContentHeight} -  ${theme.spacing(6.5)} - ${
         theme.trello.columnHeaderHeight
@@ -63,6 +73,9 @@ function ListCards({ cards, isOpenAddNewCard, toggleOpenNewCardForm }: ListCards
                   multiline
                   maxRows={6}
                   minRows={2}
+                  data-no-dnd="true"
+                  value={newCardTitle}
+                  onChange={(e) => setNewCardTitle(e.target.value)}
                   sx={{
                     flex: 1,
                     width: "100%",
@@ -83,7 +96,9 @@ function ListCards({ cards, isOpenAddNewCard, toggleOpenNewCardForm }: ListCards
                   }}
                 />
               </MuiCard>
-              <Button variant="contained">Add Card</Button>
+              <Button variant="contained" onClick={handleAddNewCard}>
+                Add Card
+              </Button>
               <IconButton
                 onClick={toggleOpenNewCardForm}
                 disableRipple

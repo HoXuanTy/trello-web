@@ -9,8 +9,18 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 function ListColumns({ columns }: Pick<Board, "columns">) {
+  const [newColumnTitle, setNewColumnTitle] = useState("");
+
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false);
   const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm);
+
+  const handleAddNewColumn = () => {
+    console.log("new column", newColumnTitle);
+    //goi APIs ...
+
+    toggleOpenNewColumnForm();
+    setNewColumnTitle("");
+  };
 
   return (
     <SortableContext
@@ -74,16 +84,19 @@ function ListColumns({ columns }: Pick<Board, "columns">) {
                 placeholder="Enter list title..."
                 size="small"
                 variant="outlined"
+                value={newColumnTitle}
+                onChange={(e) => setNewColumnTitle(e.target.value)}
                 autoFocus
+                multiline
                 sx={{
                   flex: 1,
                   width: "100%",
                   mb: 1,
-                  "& input": { bgcolor: "white", fontWeight: "600", py:"6px"},
+                  "& input": { bgcolor: "white", fontWeight: "600", py: "6px" },
                   "& .MuiOutlinedInput-root": {
                     ".MuiOutlinedInput-notchedOutline": { border: "1px solid #8590A2" },
                     "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#8590A2" 
+                      borderColor: "#8590A2",
                     },
                     "&.Mui-focused fieldset": {
                       boxShadow: "inset 0 0 0 2px #388bff",
@@ -92,7 +105,9 @@ function ListColumns({ columns }: Pick<Board, "columns">) {
                   },
                 }}
               />
-              <Button variant="contained">Add list</Button>
+              <Button variant="contained" onClick={handleAddNewColumn}>
+                Add list
+              </Button>
               <IconButton
                 disableRipple
                 sx={{
