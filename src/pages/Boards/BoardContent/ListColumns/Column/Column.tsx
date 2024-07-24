@@ -74,7 +74,7 @@ function Column({ column }: ColumnProp) {
             maxHeight: (theme) =>
               `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5.5)})`,
             cursor: "pointer",
-            pb:1
+            pb:0.5
           }}
         >
           <Box
