@@ -8,6 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
+import { toast } from "react-toastify";
 function ListColumns({ columns }: Pick<Board, "columns">) {
   const [newColumnTitle, setNewColumnTitle] = useState("");
 
@@ -15,7 +16,11 @@ function ListColumns({ columns }: Pick<Board, "columns">) {
   const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm);
 
   const handleAddNewColumn = () => {
-    console.log("new column", newColumnTitle);
+    if (!newColumnTitle) {
+      toast.error("Please enter title column!");
+      return;
+    }
+
     //goi APIs ...
 
     toggleOpenNewColumnForm();
