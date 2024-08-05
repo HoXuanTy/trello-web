@@ -2,30 +2,31 @@ import Container from "@mui/material/Container";
 import BoardBar from "./BoardBar/BoardBar";
 import AppHeader from "@/components/AppHeader/AppHeader";
 import BoardContent from "./BoardContent/BoardContent";
-import { mockData } from "@/apis/mock-data";
-import { useEffect, useState } from "react";
-import { Board as BoardType } from "@/types/BoardProp";
-import { fetchBoardDetailsAPI } from "@/apis/index";
+import { useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { fetchBoard } from "@/redux/slices/boardSlice";
+import { boardSelector } from "@/redux/selectors";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 function Board() {
-  // const [board, setBoard] = useState<BoardType | null>(null);
+  const dispath = useAppDispatch()
+  const { board } = useAppSelector(boardSelector);
+  const boardId = "6695f954a1146cab78aec0e4";
 
-  // useEffect(() => {
-  //   const boardId = "6695f954a1146cab78aec0e4";
-  //   fetchBoardDetailsAPI(boardId).then((board: BoardType) => setBoard(board));
-  // }, []);
-  
-  // if (!board) {
-  //   return (
-  //     <Box
-  //       sx={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
-  //     >
-  //       <CircularProgress size={30} />
-  //     </Box>
-  //   );
-  // }
+  useEffect(() => {
+    dispath(fetchBoard(boardId));
+  }, []);
+
+  if (!board) {
+    return (
+      <Box
+        sx={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <CircularProgress size={30} />
+      </Box>
+    );
+  }
 
   return (
     <Container
@@ -37,8 +38,8 @@ function Board() {
       }}
     >
       <AppHeader />
-      <BoardBar board={mockData.board} />
-      <BoardContent board={mockData.board} />
+      <BoardBar board={board} />
+      <BoardContent board={board} />
     </Container>
   );
 }

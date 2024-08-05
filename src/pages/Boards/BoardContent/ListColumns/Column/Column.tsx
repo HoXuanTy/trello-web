@@ -136,6 +136,7 @@ function Column({ column }: ColumnProp) {
             </Box>
           </Box>
           <ListCards
+            columnId = {column._id}
             cards={orderedCard}
             isOpenAddNewCard={openNewCardForm}
             toggleOpenNewCardForm={toggleOpenNewCardForm}
@@ -170,7 +171,7 @@ function Column({ column }: ColumnProp) {
                   Add a card
                 </Button>
                 <Tooltip title="Drag to move">
-                  <DragHandleIcon sx={{ fontSize: "20px", cursor: "pointer" }} />
+                  <DragHandleIcon sx={{ fontSize: "25px", cursor: "pointer", marginRight: 1}} />
                 </Tooltip>
               </Box>
             </Box>

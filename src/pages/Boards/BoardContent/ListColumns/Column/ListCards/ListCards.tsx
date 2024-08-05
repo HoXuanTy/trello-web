@@ -9,19 +9,37 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import theme from "@/theme";
 import { default as MuiCard } from "@mui/material/Card";
+import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { boardSelector } from "@/redux/selectors";
+import { UniqueIdentifier } from "@dnd-kit/core";
+import { createNewCard } from "@/redux/slices/boardSlice";
 
 interface ListCardsProp {
+  columnId: UniqueIdentifier;
   cards: CardType[];
   isOpenAddNewCard: boolean;
   toggleOpenNewCardForm: () => void;
 }
 
-function ListCards({ cards, isOpenAddNewCard, toggleOpenNewCardForm }: ListCardsProp) {
+function ListCards({ columnId, cards, isOpenAddNewCard, toggleOpenNewCardForm }: ListCardsProp) {
+  const dispatch = useAppDispatch();
+  const { board } = useAppSelector(boardSelector);
   const [newCardTitle, setNewCardTitle] = useState("");
 
   const handleAddNewCard = () => {
-    console.log("new Card", newCardTitle);
-    //goi APIs ...
+    if (!newCardTitle) {
+      toast.error("Please enter title card!");
+      return;
+    }
+
+    const newCard = {
+      boardId: board._id,
+      columnId: columnId,
+      title: newCardTitle,
+    };
+
+    dispatch(createNewCard(newCard));
 
     setNewCardTitle("");
   };
