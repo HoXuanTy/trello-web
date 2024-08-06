@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 function Board() {
   const dispath = useAppDispatch()
-  const { board } = useAppSelector(boardSelector);
+  const board  = useAppSelector(boardSelector);
   const boardId = "6695f954a1146cab78aec0e4";
 
   useEffect(() => {

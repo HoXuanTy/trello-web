@@ -97,7 +97,7 @@ function BoardContent({ board }: BoardProp) {
 
         //add placeholder card if column is empty
         if (isEmpty(nextActiveColumn.cards)) {
-          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn) as any]; // need mentor support
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn) as any]; 
         }
 
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map((card) => card._id);

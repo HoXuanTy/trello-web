@@ -24,7 +24,7 @@ interface ListCardsProp {
 
 function ListCards({ columnId, cards, isOpenAddNewCard, toggleOpenNewCardForm }: ListCardsProp) {
   const dispatch = useAppDispatch();
-  const { board } = useAppSelector(boardSelector);
+  const board = useAppSelector(boardSelector);
   const [newCardTitle, setNewCardTitle] = useState("");
 
   const handleAddNewCard = () => {
