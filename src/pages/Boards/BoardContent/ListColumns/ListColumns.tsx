@@ -9,7 +9,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { boardSelector } from "@/redux/selectors";
+import { createNewColumn } from "@/redux/slices/boardSlice";
 function ListColumns({ columns }: Pick<Board, "columns">) {
+  const dispatch = useAppDispatch();
+  const { board } = useAppSelector(boardSelector);
+
   const [newColumnTitle, setNewColumnTitle] = useState("");
 
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false);
@@ -21,7 +27,12 @@ function ListColumns({ columns }: Pick<Board, "columns">) {
       return;
     }
 
-    //goi APIs ...
+    const addNewColumn = {
+      title: newColumnTitle,
+      boardId: board._id
+    };
+
+    dispatch(createNewColumn(addNewColumn))
 
     toggleOpenNewColumnForm();
     setNewColumnTitle("");

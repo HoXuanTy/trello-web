@@ -16,7 +16,7 @@ import {
   getFirstCollision,
 } from "@dnd-kit/core";
 import { MouseSensor } from "@/customLibraries/DndKitSensors";
-import BoardProp, { Card as CardType, Column as ColumnType } from "@/types/BoardProp";
+import { BoardProp, Card as CardType, Column as ColumnType } from "@/types/BoardProp";
 import { arrayMove } from "@dnd-kit/sortable";
 import Box from "@mui/material/Box";
 import ListColumns from "./ListColumns/ListColumns";

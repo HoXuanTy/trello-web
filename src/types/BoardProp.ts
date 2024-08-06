@@ -1,48 +1,45 @@
 import { UniqueIdentifier } from "@dnd-kit/core";
 import { SvgIconProps } from "@mui/material";
 
-type BoardProp = {
-    board: Board;
+export type BoardProp = {
+    board: Board
 };
 
 export type Board = {
-    _id: UniqueIdentifier,
-    title: string,
-    description: string,
-    types: TypeProp[],
-    ownerIds: string[],
-    memberIds: string[],
-    columnOrderIds: string[],
+    _id: UniqueIdentifier
+    title: string
+    description: string
+    columnOrderIds: UniqueIdentifier[]
     columns: Column[]
+    slug?: string
 }
 
-type TypeProp = {
-    _id: UniqueIdentifier,
-    title: string,
+type Type = {
+    _id: UniqueIdentifier
+    title: string
     icon: React.ComponentType<SvgIconProps> | React.FunctionComponent<React.SVGAttributes<SVGElement>>,
-    description: string,
+    description: string
     disabled?: boolean
 }
 
 export type Column = {
-    _id: UniqueIdentifier,
-    boardId: UniqueIdentifier,
-    title: string,
+    _id: UniqueIdentifier
+    boardId: UniqueIdentifier
+    title: string
     cardOrderIds: UniqueIdentifier[],
     cards: Card[]
 }
 
 export type Card = {
-    _id: UniqueIdentifier,
-    boardId: UniqueIdentifier,
-    columnId: UniqueIdentifier,
-    title: string,
-    description: string,
-    cover: string,
-    memberIds: string[],
-    comments: string[],
-    attachments: string[],
+    _id: UniqueIdentifier
+    boardId: UniqueIdentifier
+    columnId: UniqueIdentifier
+    title: string
+    description: string
+    cover: string
+    memberIds: string[]
+    comments: string[]
+    attachments: string[]
     FE_PlaceholderCard?: boolean
 }
 
-export default BoardProp
