@@ -1,5 +1,5 @@
 import { createNewCardAPI, createNewColumnAPI, fetchBoardDetailsAPI } from "@/apis"
-import { Board, Card } from "@/types/BoardProp"
+import { Board, Card, Column } from "@/types/BoardProp"
 import { UniqueIdentifier } from "@dnd-kit/core"
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 
@@ -36,8 +36,9 @@ const boardSlice = createSlice({
             .addCase(createNewColumn.pending, (state, action) => {
                 state.status = "pending"
             })
-            .addCase(createNewColumn.fulfilled, (state, action) => {
+            .addCase(createNewColumn.fulfilled, (state, action: PayloadAction<Column>) => {
                 state.board.columns.push(action.payload)
+                state.board.columnOrderIds.push(action.payload._id)
                 state.status = "idle"
             })
             .addCase(createNewCard.pending, (state, action) => {
@@ -47,6 +48,7 @@ const boardSlice = createSlice({
                 state.board.columns = state.board.columns.map((column) => {
                     if (column._id === action.payload.columnId) {
                         column.cards.push(action.payload)
+                        column.cardOrderIds.push(action.payload._id)
                     }
                     return column
                 })

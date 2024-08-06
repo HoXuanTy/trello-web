@@ -9,7 +9,7 @@ export type Board = {
     _id: UniqueIdentifier
     title: string
     description: string
-    columnOrderIds: string[]
+    columnOrderIds: UniqueIdentifier[]
     columns: Column[]
     slug?: string
 }

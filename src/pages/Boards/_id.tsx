@@ -16,7 +16,7 @@ function Board() {
 
   useEffect(() => {
     dispath(fetchBoard(boardId));
-  }, []);
+  }, [fetchBoard]);
 
   if (!board) {
     return (
