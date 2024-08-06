@@ -14,7 +14,7 @@ import { boardSelector } from "@/redux/selectors";
 import { createNewColumn } from "@/redux/slices/boardSlice";
 function ListColumns({ columns }: Pick<Board, "columns">) {
   const dispatch = useAppDispatch();
-  const { board } = useAppSelector(boardSelector);
+  const board = useAppSelector(boardSelector);
 
   const [newColumnTitle, setNewColumnTitle] = useState("");
 
@@ -29,10 +29,10 @@ function ListColumns({ columns }: Pick<Board, "columns">) {
 
     const addNewColumn = {
       title: newColumnTitle,
-      boardId: board._id
+      boardId: board._id,
     };
 
-    dispatch(createNewColumn(addNewColumn))
+    dispatch(createNewColumn(addNewColumn));
 
     toggleOpenNewColumnForm();
     setNewColumnTitle("");
