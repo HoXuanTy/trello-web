@@ -25,12 +25,15 @@ import Column from "./ListColumns/Column/Column";
 import Card from "./ListColumns/Column/ListCards/Card/Card";
 import { cloneDeep, isEmpty } from "lodash";
 import { generatePlaceholderCard } from "@/utils/placeholderCard";
+import { useAppDispatch } from "@/redux/hooks";
+import { updateBoard } from "@/redux/slices/boardSlice";
 
 const ACTIVE_DRAG_TYPE = {
   COLUMN: "ACTIVE_DRAG_COLUMN_TYPE",
   CARD: "ACTIVE_DRAG_CARD_TYPE",
 };
 function BoardContent({ board }: BoardProp) {
+  const dispatch = useAppDispatch();
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10,
@@ -97,7 +100,7 @@ function BoardContent({ board }: BoardProp) {
 
         //add placeholder card if column is empty
         if (isEmpty(nextActiveColumn.cards)) {
-          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn) as any]; 
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn) as any];
         }
 
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map((card) => card._id);
@@ -120,6 +123,13 @@ function BoardContent({ board }: BoardProp) {
       }
       return nextColumns;
     });
+  };
+
+  const moveColumns = async (dndOrderedColumns: ColumnType[]) => {
+    const newBoard = { ...board };
+    newBoard.columns = dndOrderedColumns;
+    newBoard.columnOrderIds = dndOrderedColumns.map((column) => column._id);
+    dispatch(updateBoard({ boardId: newBoard._id, boardData: newBoard }));
   };
 
   const handleDragStart = (event: DragStartEvent) => {
@@ -167,15 +177,15 @@ function BoardContent({ board }: BoardProp) {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-
     // handle drap drop column
     if (activeDragType === ACTIVE_DRAG_TYPE.COLUMN) {
       if (active.id !== over?.id) {
-        setOrderedColumns((prevColumn) => {
-          const oldIndex = prevColumn.findIndex((prevColumn) => prevColumn._id === active.id);
-          const newIndex = prevColumn.findIndex((prevColumn) => prevColumn._id === over?.id);
-          return arrayMove(prevColumn, oldIndex, newIndex);
-        });
+        const oldIndex = orderedColumns.findIndex((column) => column._id === active.id);
+        const newIndex = orderedColumns.findIndex((column) => column._id === over?.id);
+        const dndOrderedColumns = arrayMove(orderedColumns, oldIndex, newIndex);
+
+        moveColumns(dndOrderedColumns);
+        setOrderedColumns(dndOrderedColumns);
       }
     }
 
