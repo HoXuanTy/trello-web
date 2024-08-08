@@ -26,7 +26,7 @@ import Card from "./ListColumns/Column/ListCards/Card/Card";
 import { cloneDeep, isEmpty } from "lodash";
 import { generatePlaceholderCard } from "@/utils/placeholderCard";
 import { useAppDispatch } from "@/redux/hooks";
-import { updateBoard } from "@/redux/slices/boardSlice";
+import { updateBoard, updateColumn } from "@/redux/slices/boardSlice";
 
 const ACTIVE_DRAG_TYPE = {
   COLUMN: "ACTIVE_DRAG_COLUMN_TYPE",
@@ -132,6 +132,15 @@ function BoardContent({ board }: BoardProp) {
     dispatch(updateBoard({ boardId: newBoard._id, boardData: newBoard }));
   };
 
+  const moveCardInSameColumn = async (
+    dndOrderedCard: CardType[],
+    dndOrderedCardIds: UniqueIdentifier[],
+    columnId: UniqueIdentifier
+  ) => {
+    const updateData = { dndOrderedCard, dndOrderedCardIds, columnId };
+    dispatch(updateColumn(updateData));
+  };
+
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
     setActiveDragType(
@@ -184,8 +193,8 @@ function BoardContent({ board }: BoardProp) {
         const newIndex = orderedColumns.findIndex((column) => column._id === over?.id);
         const dndOrderedColumns = arrayMove(orderedColumns, oldIndex, newIndex);
 
-        moveColumns(dndOrderedColumns);
         setOrderedColumns(dndOrderedColumns);
+        moveColumns(dndOrderedColumns);
       }
     }
 
@@ -214,13 +223,20 @@ function BoardContent({ board }: BoardProp) {
           activeDraggingCardData,
         });
       } else {
+        // action drag and drop in same column
         const oldCardIndex = activeDraggingColumnData.cards.findIndex(
           (card) => card._id === activeDraggingCardId
         );
 
         const newCardIndex = overColumn.cards.findIndex((card) => card._id === overCardId);
 
-        const orderedColumn = arrayMove(activeDraggingColumnData.cards, oldCardIndex, newCardIndex);
+        const dndOrderedCard = arrayMove(
+          activeDraggingColumnData.cards,
+          oldCardIndex,
+          newCardIndex
+        );
+
+        const dndOrderedCardIds = dndOrderedCard.map((card) => card._id);
 
         setOrderedColumns((prevColumns) => {
           const nextColumns = cloneDeep(prevColumns);
@@ -229,10 +245,12 @@ function BoardContent({ board }: BoardProp) {
             return [];
           }
 
-          targetColum.cards = orderedColumn;
-          targetColum.cardOrderIds = nextColumns.map((card) => card._id);
+          targetColum.cards = dndOrderedCard;
+          targetColum.cardOrderIds = dndOrderedCardIds;
           return nextColumns;
         });
+
+        //moveCardInSameColumn(dndOrderedCard, dndOrderedCardIds, activeDraggingColumnData._id);
       }
     }
 
