@@ -20,7 +20,6 @@ import { BoardProp, Card as CardType, Column as ColumnType } from "@/types/Board
 import { arrayMove } from "@dnd-kit/sortable";
 import Box from "@mui/material/Box";
 import ListColumns from "./ListColumns/ListColumns";
-import mapOrder from "@/utils/sorts";
 import Column from "./ListColumns/Column/Column";
 import Card from "./ListColumns/Column/ListCards/Card/Card";
 import { cloneDeep, isEmpty } from "lodash";
@@ -50,7 +49,7 @@ function BoardContent({ board }: BoardProp) {
   const lastOverId = useRef<UniqueIdentifier | null>(null);
 
   useEffect(() => {
-    setOrderedColumns(mapOrder(board.columns, board.columnOrderIds, "_id"));
+    setOrderedColumns(board.columns);
   }, [board]);
 
   const findColumnByCardId = (cardId: UniqueIdentifier): ColumnType | null => {
@@ -186,7 +185,7 @@ function BoardContent({ board }: BoardProp) {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    // handle drap drop column
+    // handle drag drop column
     if (activeDragType === ACTIVE_DRAG_TYPE.COLUMN) {
       if (active.id !== over?.id) {
         const oldIndex = orderedColumns.findIndex((column) => column._id === active.id);
@@ -250,7 +249,7 @@ function BoardContent({ board }: BoardProp) {
           return nextColumns;
         });
 
-        //moveCardInSameColumn(dndOrderedCard, dndOrderedCardIds, activeDraggingColumnData._id);
+        moveCardInSameColumn(dndOrderedCard, dndOrderedCardIds, activeDraggingColumnData._id);
       }
     }
 

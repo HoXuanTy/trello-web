@@ -14,6 +14,7 @@ function Board() {
   const board  = useAppSelector(boardSelector);
   const boardId = "6695f954a1146cab78aec0e4";
 
+
   useEffect(() => {
     dispath(fetchBoard(boardId));
   }, [fetchBoard]);
