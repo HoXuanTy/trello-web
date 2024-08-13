@@ -20,7 +20,6 @@ import AddIcon from "@mui/icons-material/Add";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ListCards from "./ListCards/ListCards";
 import { ColumnProp } from "@/types/ColumnProp";
-import mapOrder from "@/utils/sorts";
 
 function Column({ column }: ColumnProp) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -47,7 +46,7 @@ function Column({ column }: ColumnProp) {
     height: "100%",
   };
 
-  const orderedCard = mapOrder(column.cards, column.cardOrderIds, "_id");
+  const orderedCard = column.cards;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -75,7 +74,7 @@ function Column({ column }: ColumnProp) {
             maxHeight: (theme) =>
               `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5.5)})`,
             cursor: "pointer",
-            pb:0.5
+            pb: 0.5,
           }}
         >
           <Box
@@ -136,7 +135,7 @@ function Column({ column }: ColumnProp) {
             </Box>
           </Box>
           <ListCards
-            columnId = {column._id}
+            columnId={column._id}
             cards={orderedCard}
             isOpenAddNewCard={openNewCardForm}
             toggleOpenNewCardForm={toggleOpenNewCardForm}
@@ -171,7 +170,7 @@ function Column({ column }: ColumnProp) {
                   Add a card
                 </Button>
                 <Tooltip title="Drag to move">
-                  <DragHandleIcon sx={{ fontSize: "25px", cursor: "pointer", marginRight: 1}} />
+                  <DragHandleIcon sx={{ fontSize: "25px", cursor: "pointer", marginRight: 1 }} />
                 </Tooltip>
               </Box>
             </Box>

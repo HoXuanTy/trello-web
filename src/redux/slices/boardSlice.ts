@@ -1,4 +1,10 @@
-import { createNewCardAPI, createNewColumnAPI, fetchBoardDetailsAPI, updateBoardDetailsAPI } from "@/apis"
+import {
+    createNewCardAPI,
+    createNewColumnAPI,
+    fetchBoardDetailsAPI,
+    updateBoardDetailsAPI,
+    updateColumnDetailsAPI
+} from "@/apis"
 import { Board, Card, Column } from "@/types/BoardProp"
 import { UniqueIdentifier } from "@dnd-kit/core"
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
@@ -59,6 +65,18 @@ const boardSlice = createSlice({
             .addCase(updateBoard.fulfilled, (state, action: PayloadAction<Board>) => {
                 state.board = action.payload
             })
+            .addCase(updateColumn.pending, (state, action) => {
+                state.status = "pending"
+            })
+            .addCase(updateColumn.fulfilled, (state, action) => {
+                state.board.columns.forEach(column => {
+                    if (column._id === action.payload._id) {
+                        column.cards = action.payload.cards
+                        column.cardOrderIds = action.payload.cardOrderIds
+                    }
+                    return column
+                })
+            })
     },
 })
 
@@ -73,6 +91,13 @@ export const updateBoard = createAsyncThunk("board/updateBoard",
         const { boardId, boardData } = updateData
         const updatedBoard = await updateBoardDetailsAPI(boardId, boardData)
         return updatedBoard
+    })
+
+export const updateColumn = createAsyncThunk("columns/updateColumn",
+    async (updateData: { dndOrderedCard: Card[], dndOrderedCardIds: UniqueIdentifier[], columnId: UniqueIdentifier }) => {
+        const { dndOrderedCard, dndOrderedCardIds, columnId } = updateData
+        const updatedColumn = await updateColumnDetailsAPI(columnId, { cards: dndOrderedCard, cardOrderIds: dndOrderedCardIds })
+        return updatedColumn
     })
 
 export const createNewColumn = createAsyncThunk("columns/createColumn",
