@@ -52,7 +52,6 @@ function BoardContent({ board }: BoardProp) {
 		setOrderedColumns(board.columns);
 	}, [board]);
 
-	
 	const findColumnByCardId = (cardId: UniqueIdentifier): ColumnType | null => {
 		const column = orderedColumns.find((column) => column.cards.map((card) => card._id).includes(cardId));
 		return column ?? null;
@@ -119,13 +118,17 @@ function BoardContent({ board }: BoardProp) {
 			// dispath a thunk function
 			if (triggerFrom === "handleDragEnd") {
 				if (activeDraggingColumnData && nextOverColumn) {
+					let prevCardOrderIds =
+						nextColumns.find((column) => column._id === activeDraggingColumnData._id)?.cardOrderIds ?? [];
+
+					if (String(prevCardOrderIds[0]).includes("placeholder-card")) prevCardOrderIds = [];
+
 					dispatch(
 						moveCardToDifferentColumn({
 							newCardIndex: newCardIndex,
 							currentCardId: activeDraggingCardId,
 							prevColumnId: activeDraggingColumnData._id,
-							prevCardOrderIds:
-								nextColumns.find((column) => column._id === activeDraggingColumnData._id)?.cardOrderIds ?? [],
+							prevCardOrderIds: prevCardOrderIds,
 							nextColumnId: nextOverColumn._id,
 							nextCardOrederIds: nextColumns.find((column) => column._id === nextOverColumn._id)?.cardOrderIds ?? [],
 						}),
