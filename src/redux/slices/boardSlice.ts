@@ -2,12 +2,15 @@ import {
     createNewCardAPI,
     createNewColumnAPI,
     fetchBoardDetailsAPI,
+    moveCardToDifferentColumnAPI,
     updateBoardDetailsAPI,
     updateColumnDetailsAPI
 } from "@/apis"
 import { Board, Card, Column } from "@/types/BoardProp"
+import mapOrder from "@/utils/sorts"
 import { UniqueIdentifier } from "@dnd-kit/core"
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
+import { Console } from "console"
 
 interface boardState {
     board: Board
@@ -64,9 +67,7 @@ const boardSlice = createSlice({
             })
             .addCase(updateBoard.fulfilled, (state, action: PayloadAction<Board>) => {
                 state.board = action.payload
-            })
-            .addCase(updateColumn.pending, (state, action) => {
-                state.status = "pending"
+                state.status = "idle"
             })
             .addCase(updateColumn.fulfilled, (state, action) => {
                 state.board.columns.forEach(column => {
@@ -76,6 +77,29 @@ const boardSlice = createSlice({
                     }
                     return column
                 })
+            })
+            .addCase(moveCardToDifferentColumn.fulfilled, (state, action) => {
+                const { currentCardId, prevColumnId, nextColumnId, newCardIndex } = action.payload
+                state.board.columns.forEach(column => {
+                    column.cards = mapOrder(column.cards, column.cardOrderIds, "_id")
+                })
+                const fromColumn = state.board.columns.find(column => column._id === prevColumnId);
+                const toColumn = state.board.columns.find(column => column._id === nextColumnId);
+
+                if (fromColumn && toColumn) {
+                    const cardIndex = fromColumn.cards.findIndex(card => card._id === currentCardId);
+                    const [movedCard] = fromColumn.cards.splice(cardIndex, 1);
+
+                    toColumn.cards = toColumn.cards.toSpliced(newCardIndex, 0, movedCard)
+                    toColumn.cardOrderIds = toColumn.cards.map(card => card._id)
+
+                    fromColumn.cards = fromColumn.cards.filter(card => card._id !== currentCardId);
+                    fromColumn.cardOrderIds = fromColumn.cards.map(card => card._id)
+                }
+                state.status = "idle"
+            })
+            .addCase(moveCardToDifferentColumn.rejected, (state, action) => {
+                state.status = "failed"
             })
     },
 })
@@ -91,6 +115,31 @@ export const updateBoard = createAsyncThunk("board/updateBoard",
         const { boardId, boardData } = updateData
         const updatedBoard = await updateBoardDetailsAPI(boardId, boardData)
         return updatedBoard
+    })
+
+export const moveCardToDifferentColumn = createAsyncThunk("board/moveCardToDifferentColumn",
+    async (updateData: {
+        newCardIndex: number,
+        currentCardId: UniqueIdentifier,
+        prevColumnId: UniqueIdentifier,
+        prevCardOrderIds: UniqueIdentifier[],
+        nextColumnId: UniqueIdentifier,
+        nextCardOrederIds: UniqueIdentifier[],
+    }, { rejectWithValue }) => {
+        const { currentCardId, prevColumnId, prevCardOrderIds, nextColumnId, nextCardOrederIds } = updateData
+        const result = await moveCardToDifferentColumnAPI({
+            currentCardId,
+            prevColumnId,
+            prevCardOrderIds,
+            nextColumnId,
+            nextCardOrederIds
+        })
+        
+        if (result.updateResult === 'move card successfully') {
+            return updateData
+        } else {
+            return rejectWithValue('Failed to move card');
+        }
     })
 
 export const updateColumn = createAsyncThunk("columns/updateColumn",
