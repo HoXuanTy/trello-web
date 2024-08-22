@@ -11,7 +11,9 @@ export type Board = {
     description: string
     columnOrderIds: UniqueIdentifier[]
     columns: Column[]
-    slug?: string
+    slug?: string,
+    isImage: boolean
+    backgroundImageLink: string
 }
 
 type Type = {

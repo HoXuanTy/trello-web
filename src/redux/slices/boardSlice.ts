@@ -10,7 +10,6 @@ import { Board, Card, Column } from "@/types/BoardProp"
 import mapOrder from "@/utils/sorts"
 import { UniqueIdentifier } from "@dnd-kit/core"
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Console } from "console"
 
 interface boardState {
     board: Board
@@ -24,7 +23,9 @@ const initialState: boardState = {
         description: '',
         columnOrderIds: [],
         columns: [],
-        slug: ''
+        slug: '',
+        isImage: true,
+        backgroundImageLink: ''
     },
     status: 'idle'
 }
@@ -35,10 +36,10 @@ const boardSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(fetchBoard.pending, (state, action) => {
+            .addCase(fetchBoardDetails.pending, (state, action) => {
                 state.status = "pending"
             })
-            .addCase(fetchBoard.fulfilled, (state, action: PayloadAction<Board>) => {
+            .addCase(fetchBoardDetails.fulfilled, (state, action: PayloadAction<Board>) => {
                 state.board = action.payload
                 state.status = "idle"
             })
@@ -61,9 +62,6 @@ const boardSlice = createSlice({
                     }
                     return column
                 })
-            })
-            .addCase(updateBoard.pending, (state, action) => {
-                state.status = "pending"
             })
             .addCase(updateBoard.fulfilled, (state, action: PayloadAction<Board>) => {
                 state.board = action.payload
@@ -104,7 +102,7 @@ const boardSlice = createSlice({
     },
 })
 
-export const fetchBoard = createAsyncThunk("board/fetchBoard",
+export const fetchBoardDetails = createAsyncThunk("board/fetchBoard",
     async (boardId: UniqueIdentifier) => {
         const board = await fetchBoardDetailsAPI(boardId)
         return board
@@ -134,7 +132,7 @@ export const moveCardToDifferentColumn = createAsyncThunk("board/moveCardToDiffe
             nextColumnId,
             nextCardOrederIds
         })
-        
+
         if (result.updateResult === 'move card successfully') {
             return updateData
         } else {
