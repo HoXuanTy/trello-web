@@ -90,7 +90,7 @@ function BoardContent({ board }: BoardProp) {
 			const nextColumns = cloneDeep(prevColumns);
 			const nextActiveColumn = nextColumns.find((column) => column._id === activeColumn._id);
 			const nextOverColumn = nextColumns.find((column) => column._id === overColumn._id);
-
+			
 			if (nextActiveColumn) {
 				nextActiveColumn.cards = nextActiveColumn.cards.filter((card) => card._id !== activeDraggingCardId);
 
@@ -100,7 +100,7 @@ function BoardContent({ board }: BoardProp) {
 				}
 				nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map((card) => card._id);
 			}
-
+  
 			if (nextOverColumn) {
 				nextOverColumn.cards = nextOverColumn.cards.filter((card) => card._id !== activeDraggingCardId);
 

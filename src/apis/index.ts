@@ -3,6 +3,12 @@ import { API_ROOT } from '@/utils/constants'
 import { Board, Card, Column } from '@/types/BoardProp'
 import { UniqueIdentifier } from '@dnd-kit/core'
 
+
+
+export const fetchBoardsAPI = async (): Promise<Board[]> => {
+    const response = await axios.get(`${API_ROOT}/v1/boards`)
+    return response.data
+}
 export const fetchBoardDetailsAPI = async (boardId: UniqueIdentifier): Promise<Board> => {
     const response = await axios.get(`${API_ROOT}/v1/boards/${boardId}`)
     return response.data
