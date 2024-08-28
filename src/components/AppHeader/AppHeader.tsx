@@ -48,9 +48,9 @@ function AppHeader() {
           </Typography>
         </Box>
         <WorkSpaces />
-        <Recent />
+        {/* <Recent />
         <Starred />
-        <Templates />
+        <Templates /> */}
         <Button
           variant="outlined"
           sx={{
