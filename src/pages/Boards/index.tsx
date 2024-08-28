@@ -77,7 +77,9 @@ const Boards = () => {
 									boxShadow: "rgba(0, 0, 0, 0.3) 0 1px 3px",
 									fontSize: "1rem",
 									...(board.isImage
-										? { backgroundImage: `url(${board.backgroundImageLink})`}
+										? {
+												backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${board.backgroundImageLink})`,
+										  }
 										: { backgroundColor: board.backgroundImageLink }),
 								}}
 								onClick={() => navigate(`/board/${board._id}`)}
