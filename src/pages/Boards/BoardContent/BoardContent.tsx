@@ -1,3 +1,7 @@
+import Box from "@mui/material/Box";
+import ListColumns from "./ListColumns/ListColumns";
+import Column from "./ListColumns/Column/Column";
+import Card from "./ListColumns/Column/ListCards/Card/Card";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
 	DndContext,
@@ -18,10 +22,6 @@ import {
 import { MouseSensor } from "@/customLibraries/DndKitSensors";
 import { BoardProp, Card as CardType, Column as ColumnType } from "@/types/BoardProp";
 import { arrayMove } from "@dnd-kit/sortable";
-import Box from "@mui/material/Box";
-import ListColumns from "./ListColumns/ListColumns";
-import Column from "./ListColumns/Column/Column";
-import Card from "./ListColumns/Column/ListCards/Card/Card";
 import { cloneDeep, isEmpty } from "lodash";
 import { generatePlaceholderCard } from "@/utils/placeholderCard";
 import { useAppDispatch } from "@/redux/hooks";
@@ -310,7 +310,7 @@ function BoardContent({ board }: BoardProp) {
 		>
 			<Box
 				sx={{
-					bgcolor: (theme) => (theme.palette.mode === "dark" ? "#166194" : "#0984e3"),
+					//bgcolor: (theme) => (theme.palette.mode === "dark" ? "#166194" : "#0984e3"),
 					height: (theme) => theme.trello.boardContentHeight,
 					padding: "8px 0",
 				}}
