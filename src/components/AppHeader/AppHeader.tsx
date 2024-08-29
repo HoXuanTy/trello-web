@@ -13,9 +13,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import TrelloIcon from "@/assets/icons/trello.svg?react";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import WorkSpaces from "./Menus/WorkSpaces";
-import Recent from "./Menus/Recent";
-import Starred from "./Menus/Starred";
-import Templates from "./Menus/Templates";
 import Profile from "./Menus/Profile";
 
 function AppHeader() {
@@ -48,9 +45,6 @@ function AppHeader() {
           </Typography>
         </Box>
         <WorkSpaces />
-        <Recent />
-        <Starred />
-        <Templates />
         <Button
           variant="outlined"
           sx={{

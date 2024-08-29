@@ -13,82 +13,77 @@ import CustomizeView from "./MenuBoards/CustomizeView";
 // import ChangeVisibility from "./MenuBoards/ChangeVisibility";
 import GroupAvatar from "@/components/GroupAvatars/GroupAvatar";
 import ShareBoard from "./MenuBoards/ShareBoard";
-import BoardProp from "@/types/BoardProp";
-function BoardBar({board}: BoardProp) {
-  return (
-    <Box
-      px={2}
-      sx={{
-        height: (theme) => theme.trello.boardHeight,
-        backgroundColor: "primary.dark",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        bgcolor: (theme) =>
-          theme.palette.mode === "dark" ? "#0E4473" : "#0B50AD",
-        borderBottom: "1px solid #ffffff29"
-      }}
-    >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-        <Chip
-          label={board.title}
-          sx={{
-            fontSize: "18px",
-            color: "#fff",
-            bgcolor: "inherit",
-            fontWeight: "900",
-            "&:hover": {
-              bgcolor: "#a6c5e229",
-            },
-            borderRadius: "4px",
-            textTransform: "capitalize",
-          }}
-        />
-        <IconButton
-          disableRipple
-          sx={{
-            "&:hover": {
-              bgcolor: "#a6c5e229",
-            },
-            borderRadius: "4px",
-          }}
-        >
-          <StarOutlineIcon
-            sx={{
-              fontSize: "18px",
-              color: "#fff",
-              "&:hover": {
-                transform: "scale(1.2)",
-                cursor: "pointer",
-              },
-              height: "100%",
-            }}
-          />
-        </IconButton>
-        {/* <ChangeVisibility types={board.types}/> */}
-        <CustomizeView />
-      </Box>
-      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <Tooltip title="calendar">
-          <CalendarMonthIcon sx={{ color: "#fff" }} />
-        </Tooltip>
-        <Tooltip title="Automation">
-          <BoltIcon sx={{ color: "#fff" }} />
-        </Tooltip>
-        <FilterCard />
-        <Divider
-          orientation="vertical"
-          variant="middle"
-          flexItem
-          sx={{ borderColor: "rgba(255 255 255 / 0.13)" }}
-        />
-        <GroupAvatar />
-        <ShareBoard />
-        <MoreHorizOutlinedIcon sx={{ color: "#fff" }} />
-      </Box>
-    </Box>
-  );
+import { BoardProp } from "@/types/BoardProp";
+function BoardBar({ board }: BoardProp) {
+	return (
+		<Box
+			px={2}
+			sx={{
+				height: (theme) => theme.trello.boardHeight,
+				//backgroundColor: "primary.dark",
+				width: "100%",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "space-between",
+				//bgcolor: (theme) => (theme.palette.mode === "dark" ? "#0E4473" : "#0B50AD"),
+				borderBottom: "1px solid #ffffff29",
+				background: "rgba(0, 0, 0, 0.25)",
+				backdropFilter: "blur(4px)",
+			}}
+		>
+			<Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+				<Chip
+					label={board.title}
+					sx={{
+						fontSize: "18px",
+						color: "#fff",
+						bgcolor: "inherit",
+						fontWeight: "900",
+						"&:hover": {
+							bgcolor: "#a6c5e229",
+						},
+						borderRadius: "4px",
+						textTransform: "capitalize",
+					}}
+				/>
+				<IconButton
+					disableRipple
+					sx={{
+						"&:hover": {
+							bgcolor: "#a6c5e229",
+						},
+						borderRadius: "4px",
+					}}
+				>
+					<StarOutlineIcon
+						sx={{
+							fontSize: "18px",
+							color: "#fff",
+							"&:hover": {
+								transform: "scale(1.2)",
+								cursor: "pointer",
+							},
+							height: "100%",
+						}}
+					/>
+				</IconButton>
+				<CustomizeView />
+			</Box>
+			<Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+				<Tooltip title="calendar">
+					<CalendarMonthIcon sx={{ color: "#fff" }} />
+				</Tooltip>
+				<Tooltip title="Automation">
+					<BoltIcon sx={{ color: "#fff" }} />
+				</Tooltip>
+				<FilterCard />
+				<Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor: "rgba(255 255 255 / 0.13)" }} />
+				<GroupAvatar />
+				<ShareBoard />
+				<MoreHorizOutlinedIcon sx={{ color: "#fff" }} />
+			</Box>
+		</Box>
+	);
 }
 
 export default BoardBar;

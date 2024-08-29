@@ -9,6 +9,12 @@ export const fetchBoardsAPI = async (): Promise<Board[]> => {
     const response = await axios.get(`${API_ROOT}/v1/boards`)
     return response.data
 }
+
+export const createNewBoardAPI = async (newBoard: { title: string, backgroundImageLink: string }) => {
+    const response = await axios.post(`${API_ROOT}/v1/boards`, newBoard)
+    return response.data
+}
+
 export const fetchBoardDetailsAPI = async (boardId: UniqueIdentifier): Promise<Board> => {
     const response = await axios.get(`${API_ROOT}/v1/boards/${boardId}`)
     return response.data
@@ -25,7 +31,7 @@ export const moveCardToDifferentColumnAPI = async (updateData: {
     prevCardOrderIds: UniqueIdentifier[],
     nextColumnId: UniqueIdentifier,
     nextCardOrederIds: UniqueIdentifier[],
-}):Promise<{updateResult: string}> => {
+}): Promise<{ updateResult: string }> => {
     const response = await axios.put(`${API_ROOT}/v1/boards/supports/moving_card`, updateData)
     return response.data
 }

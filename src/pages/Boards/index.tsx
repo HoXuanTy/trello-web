@@ -7,10 +7,12 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { boardsSelector } from "@/redux/selectors";
 import { fetchBoards } from "@/redux/slices/boardsSlice";
 import { useNavigate } from "react-router-dom";
+import CreateBoard from "@/components/CreateBoards/CreateBoard";
 
 const Boards = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const [openModal, setOpenModal] = useState(false);
 	const { pending, boardsData } = useAppSelector(boardsSelector);
 
 	useEffect(() => {
@@ -20,6 +22,10 @@ const Boards = () => {
 	useEffect(() => {
 		document.title = "Boards | Trello";
 	}, []);
+
+	const handleModalClose = () => {
+		setOpenModal(false);
+	};
 
 	return (
 		<>
@@ -71,7 +77,9 @@ const Boards = () => {
 									boxShadow: "rgba(0, 0, 0, 0.3) 0 1px 3px",
 									fontSize: "1rem",
 									...(board.isImage
-										? { backgroundImage: `url(${board.backgroundImageLink})` }
+										? {
+												backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${board.backgroundImageLink})`,
+										  }
 										: { backgroundColor: board.backgroundImageLink }),
 								}}
 								onClick={() => navigate(`/board/${board._id}`)}
@@ -104,10 +112,12 @@ const Boards = () => {
 									backgroundColor: "#091e4224",
 								},
 							}}
+							onClick={() => setOpenModal(true)}
 						>
 							Create new board
 						</Box>
 					)}
+					{openModal && <CreateBoard callback={handleModalClose} />}
 				</Box>
 			</Container>
 		</>
